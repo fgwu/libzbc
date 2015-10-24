@@ -821,18 +821,28 @@ int32_t
 zbc_write(struct zbc_device *dev,
           struct zbc_zone *zone,
           const void *buf,
-          uint32_t lba_count)
+          uint32_t lba_count,
+          uint64_t lba_ofst)
 {
     int ret = -EINVAL;
 
-    if ( zbc_zone_sequential(zone)
-         && (! zbc_zone_full(zone)) ) {
+    if (! zbc_zone_full(zone)) {
 
-        ret = zbc_pwrite(dev,
-                         zone,
-                         buf,
-                         lba_count,
-                         zbc_zone_wp_lba(zone) - zbc_zone_start_lba(zone));
+	if (zbc_zone_sequential_req(zone))
+	    ret = zbc_pwrite(dev,
+			     zone,
+			     buf,
+			     lba_count,
+			     zbc_zone_wp_lba(zone) - zbc_zone_start_lba(zone));
+	
+
+	if ( zbc_zone_sequential_pref(zone))
+	    ret = zbc_pwrite(dev,
+			     zone,
+			     buf,
+			     lba_count,
+			     lba_ofst);
+	
         if ( ret > 0 ) {
             zbc_zone_wp_lba_inc(zone, ret);
         }

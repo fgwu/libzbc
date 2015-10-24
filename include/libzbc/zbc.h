@@ -519,7 +519,8 @@ extern int32_t
 zbc_write(struct zbc_device *dev,
           struct zbc_zone *zone,
           const void *buf,
-          uint32_t lba_count);
+          uint32_t lba_count,
+          uint64_t lba_ofst);
 
 /**
  * zbc_flush - flush to a ZBC device cache

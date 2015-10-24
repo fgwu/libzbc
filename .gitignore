@@ -97,3 +97,5 @@ tools/lkvs/m4/ltsugar.m4
 tools/lkvs/m4/ltversion.m4
 tools/lkvs/m4/lt~obsolete.m4
 
+cscope*
+TAGS

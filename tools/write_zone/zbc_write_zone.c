@@ -349,7 +349,7 @@ usage:
 
     }
 
-    if ( zbc_zone_sequential(iozone) ) {
+    if ( zbc_zone_sequential_req(iozone) ) {
         if ( zbc_zone_full(iozone) ) {
             lba_ofst = zbc_zone_length(iozone);
 	} else {
@@ -406,7 +406,7 @@ usage:
 
         /* Do not exceed the end of the zone */
         lba_count = iosize / info.zbd_logical_block_size;
-        if ( zbc_zone_sequential(iozone) ) {
+        if ( zbc_zone_sequential_req(iozone) ) {
             if ( zbc_zone_full(iozone) ) {
                 lba_ofst = zbc_zone_length(iozone);
                 lba_count = 0;
@@ -426,10 +426,11 @@ usage:
 	    break;
 	}
 
-        if ( zbc_zone_conventional(iozone) ) {
-            ret = zbc_pwrite(dev, iozone, iobuf, lba_count, lba_ofst);
+        if ( zbc_zone_conventional(iozone) ||
+	     zbc_zone_sequential_pref(iozone)) {
+	    ret = zbc_pwrite(dev, iozone, iobuf, lba_count, lba_ofst);
         } else {
-            ret = zbc_write(dev, iozone, iobuf, lba_count);
+	    ret = zbc_write(dev, iozone, iobuf, lba_count, lba_ofst);
         }
 
 	if ( ret > 0 ) {
