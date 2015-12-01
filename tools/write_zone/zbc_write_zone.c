@@ -87,7 +87,7 @@ main(int argc,
     struct zbc_zone *iozone = NULL;
     unsigned int nr_zones;
     char *path, *file = NULL;
-    long long lba_ofst = 0;
+    long long lba_ofst = -1;
     int flush = 0;
 
     /* Check command line */
@@ -347,6 +347,18 @@ usage:
                ionum,
                iosize);
 
+    }
+
+    /* -lba not set, set it to:
+     * wp for sequential zone
+     * zone start for conventonal zone 
+     */
+    if (lba_ofst < 0) {
+	if ( zbc_zone_sequential(iozone) ) {
+	    lba_ofst = zbc_zone_wp_lba(iozone) - zbc_zone_start_lba(iozone);
+	} else {
+	    lba_ofst = zbc_zone_start_lba(iozone);
+	}
     }
 
     if ( zbc_zone_sequential_req(iozone) ) {
