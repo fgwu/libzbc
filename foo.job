@@ -1,0 +1,4 @@
+# format: 
+# zone_id lba_offset lba_count IO_size(B) repeat_times
+64 1 100 4096 2
+67 -1 16 8192 1 # lba_offset = -1 means write to wp

@@ -1,3 +1,8 @@
 bin_PROGRAMS += zbc_write_zone
+bin_PROGRAMS += zbc_write_zone2
+
 zbc_write_zone_SOURCES = tools/write_zone/zbc_write_zone.c
 zbc_write_zone_LDADD = $(libzbc_ldadd)
+
+zbc_write_zone2_SOURCES = tools/write_zone/zbc_write_zone2.c
+zbc_write_zone2_LDADD = $(libzbc_ldadd)
