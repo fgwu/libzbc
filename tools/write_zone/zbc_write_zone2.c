@@ -125,7 +125,7 @@ parse_script(
 	{
 		if (line[0] == '#')
 			continue;
-		if (5 != sscanf(line, "%d %Ld %"PRIo32" %zu %d", 
+		if (5 != sscanf(line, "%d %Ld %u %zu %d", 
 				&job->tasks[i].zidx,
 				&job->tasks[i].lba_ofst,
 				&job->tasks[i].lba_count,
@@ -133,7 +133,7 @@ parse_script(
 				&job->tasks[i].rep))
 			continue;
 
-		printf("%d %Ld %"PRIo32" %zu %d\n",
+		printf("%d %Ld %u %zu %d\n",
 		       job->tasks[i].zidx,
 		       job->tasks[i].lba_ofst,
 		       job->tasks[i].lba_count,
@@ -160,20 +160,18 @@ main(int argc,
     struct zbc_device *dev = NULL;
     unsigned long long elapsed;
     unsigned long long bcount = 0;
-    unsigned long long fsize, brate;
-    struct stat st;
-    int zidx;
-    int floop = 0, fd = -1, i, ret = 1;
-    size_t iosize, ioalign;
+    unsigned long long brate;
+    int fd = -1, i, j, k, ret = 1;
+    size_t ioalign;
     void *iobuf = NULL;
-    uint32_t lba_count = 0;
     unsigned long long iocount = 0, ionum = 0;
     struct zbc_zone *zones = NULL;
     struct zbc_zone *iozone = NULL;
     unsigned int nr_zones;
-    char *path, *file = NULL;
+    char *path;
+    uint32_t lba_count, lba_count_total;
+    long long lba_ofst;
     char *script_file = NULL;
-    long long lba_ofst = -1;
     int flush = 0;
 
     struct job_struct job;
@@ -188,11 +186,6 @@ usage:
                "Options:\n"
                "    -v         : Verbose mode\n"
                "    -s         : (sync) Run zbc_flush after writing\n"
-               "    -nio <num> : Limit the number of I/O executed to <num>\n"
-               "    -f <file>  : Write the content of <file>\n"
-               "    -loop      : If a file is specified, repeatedly write the\n"
-               "                 file to the zone until the zone is full.\n"
-               "    -lba       : lba offset, from given zone <zone no> starting lba, where to write.\n"
 	       "    -p <script>: the script to be processed.\n"
 	       "    -k <num_run>: repeat the script for num_run times",
                argv[0]);
@@ -201,90 +194,44 @@ usage:
 
     /* Parse options */
     for(i = 1; i < (argc - 1); i++) {
-
         if ( strcmp(argv[i], "-v") == 0 ) {
-
             zbc_set_log_level("debug");
-
 	} else if ( strcmp(argv[i], "-s") == 0 ) {
-
             flush = 1;
-
         } else if ( strcmp(argv[i], "-nio") == 0 ) {
-
-            if ( i >= (argc - 1) ) {
+            if ( i >= (argc - 1) ) 
                 goto usage;
-            }
             i++;
-
             ionum = atoi(argv[i]);
             if ( ionum <= 0 ) {
                 fprintf(stderr, "Invalid number of I/Os\n");
 		goto out_failure;
             }
-
-        } else if ( strcmp(argv[i], "-f") == 0 ) {
-
-            if ( i >= (argc - 1) ) {
-                goto usage;
-            }
-            i++;
-
-            file = argv[i];
-
-        } else if ( strcmp(argv[i], "-loop") == 0 ) {
-
-            floop = 1;
-
-        } else if ( strcmp(argv[i], "-lba") == 0 ) {
-
-            if ( i >= (argc - 1) ) {
-                goto usage;
-            }
-            i++;
-
-            lba_ofst = atoll(argv[i]);
-            if ( lba_ofst < 0 ) {
-                fprintf(stderr, "Invalid negative LBA offset\n");
-		goto out_failure;
-            }
-
         } else if ( strcmp(argv[i], "-p") == 0 ) {
-            if ( i >= (argc - 1) ) {
+            if ( i >= (argc - 1) )
                 goto usage;
-            }
             i++;
-
 	    script_file = argv[i];
-
         } else if ( strcmp(argv[i], "-k") == 0 ) {
-            if ( i >= (argc - 1) ) {
+            if ( i >= (argc - 1) )
                 goto usage;
-            }
             i++;
-
             num_run = atoi(argv[i]);
             if ( num_run <= 0 ) {
                 fprintf(stderr, "Invalid number total runs\n");
 		goto out_failure;
             }
-		
         } else if ( argv[i][0] == '-' ) {
-
             fprintf(stderr,
                     "Unknown option \"%s\"\n",
                     argv[i]);
             goto usage;
-
         } else {
-
             break;
-
         }
-
     }
 
-    if ( i != (argc - 3) ) {
+    if ( i != (argc - 1) ) {
         goto usage;
     }
 
@@ -296,28 +243,8 @@ usage:
 
     printf("total num_run=%d\n", num_run);
 
-    goto out_success;
-
     /* Get parameters */
     path = argv[i];
-
-    zidx = atoi(argv[i + 1]);
-    if ( zidx < 0 ) {
-	fprintf(stderr,
-                "Invalid zone number %s\n",
-		argv[i + 1]);
-        ret = 1;
-        goto out;
-    }
-
-    iosize = atol(argv[i + 2]);
-    if ( ! iosize ) {
-	fprintf(stderr,
-                "Invalid I/O size %s\n",
-		argv[i + 2]);
-        ret = 1;
-        goto out;
-    }
 
     /* Setup signal handler */
     signal(SIGQUIT, zbc_write_zone_sigcatcher);
@@ -345,302 +272,230 @@ usage:
         goto out;
     }
 
-    /* Get target zone */
-    if ( zidx >= (int)nr_zones ) {
-        fprintf(stderr, "Target zone not found\n");
-        ret = 1;
-        goto out;
-    }
-    iozone = &zones[zidx];
-
     printf("Device %s: %s\n",
-           path,
-           info.zbd_vendor_id);
+	   path,
+	   info.zbd_vendor_id);
     printf("    %s interface, %s disk model\n",
-           zbc_disk_type_str(info.zbd_type),
-           zbc_disk_model_str(info.zbd_model));
+	   zbc_disk_type_str(info.zbd_type),
+	   zbc_disk_model_str(info.zbd_model));
     printf("    %llu logical blocks of %u B\n",
-           (unsigned long long) info.zbd_logical_blocks,
-           (unsigned int) info.zbd_logical_block_size);
+	   (unsigned long long) info.zbd_logical_blocks,
+	   (unsigned int) info.zbd_logical_block_size);
     printf("    %llu physical blocks of %u B\n",
-           (unsigned long long) info.zbd_physical_blocks,
-           (unsigned int) info.zbd_physical_block_size);
+	   (unsigned long long) info.zbd_physical_blocks,
+	   (unsigned int) info.zbd_physical_block_size);
     printf("    %.03F GB capacity\n",
-           (double) (info.zbd_physical_blocks * info.zbd_physical_block_size) / 1000000000);
+	   (double) (info.zbd_physical_blocks * info.zbd_physical_block_size) / 1000000000);
 
-    printf("Target zone: Zone %d / %d, type 0x%x (%s), cond 0x%x (%s), need_reset %d, non_seq %d, LBA %llu, %llu sectors, wp %llu\n",
-           zidx,
-           nr_zones,
-           zbc_zone_type(iozone),
-           zbc_zone_type_str(zbc_zone_type(iozone)),
-           zbc_zone_condition(iozone),
-           zbc_zone_condition_str(zbc_zone_condition(iozone)),
-           zbc_zone_need_reset(iozone),
-           zbc_zone_non_seq(iozone),
-           zbc_zone_start_lba(iozone),
-           zbc_zone_length(iozone),
-           zbc_zone_wp_lba(iozone));
 
-    /* Check I/O size alignment */
-    if ( zbc_zone_sequential_req(iozone) ) {
-	ioalign = info.zbd_physical_block_size;
-    } else {
-	ioalign = info.zbd_logical_block_size;
-    }
-    if ( iosize % ioalign ) {
-        fprintf(stderr,
-                "Invalid I/O size %zu (must be aligned on %zu)\n",
-                iosize,
-		ioalign);
-        ret = 1;
-        goto out;
-    }
+    for(j = 0; j < num_run; j++){
+	    printf("------processing script (%d/%d)------\n", j + 1, num_run);
+	    for (i = 0; i < job.num; i++){
+		    if (job.tasks[i].zidx < 0 ) {
+			    printf("skip invalid zone number %d\n",
+				   job.tasks[i].zidx);
+			    continue;
+		    }
 
-    /* Get an I/O buffer */
-    ret = posix_memalign((void **) &iobuf, ioalign, iosize);
-    if ( ret != 0 ) {
-        fprintf(stderr,
-                "No memory for I/O buffer (%zu B)\n",
-                iosize);
-        ret = 1;
-        goto out;
-    }
+		    if ( ! job.tasks[i].iosize ) {
+			    printf("skip invalid I/O size %zu\n",
+				    job.tasks[i].iosize );
+			    continue;
+		    }
 
-    /* Open the file to write, if any */
-    if ( file ) {
 
-        fd = open(file, O_LARGEFILE | O_RDONLY);
-        if ( fd < 0 ) {
-            fprintf(stderr, "Open file \"%s\" failed %d (%s)\n",
-                    file,
-                    errno,
-                    strerror(errno));
-            ret = 1;
-            goto out;
-        }
+		    /* Get target zone */
+		    if ( job.tasks[i].zidx >= (int)nr_zones ) {
+			    printf("skip zone %d: not found\n", 
+				   job.tasks[i].zidx);
+			    continue;
+		    }
+		    iozone = &zones[job.tasks[i].zidx];
 
-        ret = fstat(fd, &st);
-        if ( ret != 0 ) {
-            fprintf(stderr, "Stat file \"%s\" failed %d (%s)\n",
-                    file,
-                    errno,
-                    strerror(errno));
-            ret = 1;
-            goto out;
-        }
+		    printf("Target zone: Zone %d / %d, type 0x%x (%s), cond 0x%x (%s), need_reset %d, non_seq %d, LBA %llu, %llu sectors, wp %llu\n",
+			   job.tasks[i].zidx,
+			   nr_zones,
+			   zbc_zone_type(iozone),
+			   zbc_zone_type_str(zbc_zone_type(iozone)),
+			   zbc_zone_condition(iozone),
+			   zbc_zone_condition_str(zbc_zone_condition(iozone)),
+			   zbc_zone_need_reset(iozone),
+			   zbc_zone_non_seq(iozone),
+			   zbc_zone_start_lba(iozone),
+			   zbc_zone_length(iozone),
+			   zbc_zone_wp_lba(iozone));
+		    
 
-        if ( S_ISREG(st.st_mode) ) {
-            fsize = st.st_size;
-        } else if ( S_ISBLK(st.st_mode) ) {
-            ret = ioctl(fd, BLKGETSIZE64, &fsize);
-            if ( ret != 0 ) {
-                fprintf(stderr,
-                        "ioctl BLKGETSIZE64 block device \"%s\" failed %d (%s)\n",
-                        file,
-                        errno,
-                        strerror(errno));
-                ret = 1;
-                goto out;
-            }
-        } else {
-            fprintf(stderr, "Unsupported file \"%s\" type\n",
-                    file);
-            ret = 1;
-            goto out;
-        }
 
-        printf("Writting file \"%s\" (%llu B) to target zone %d, %zu B I/Os\n",
-               file,
-               fsize,
-               zidx,
-               iosize);
+		    /* Check I/O size alignment */
+		    if ( zbc_zone_sequential(iozone)){
+			    ioalign = info.zbd_physical_block_size;
+		    } else {
+			    ioalign = info.zbd_logical_block_size;
+		    }
+		    if ( job.tasks[i].iosize % ioalign ) {
+			    printf("skip invalid I/O size %zu "
+				   "(must be aligned on %zu)\n",
+				   job.tasks[i].iosize,
+				   ioalign);
+			    continue;
+		    }
 
-    } else if ( ! ionum ) {
+		    /* Get an I/O buffer */
+		    ret = posix_memalign((void **) &iobuf, ioalign, 
+					 job.tasks[i].iosize);
+		    if ( ret != 0 ) {
+			    printf("skip: no memory for I/O buffer (%zu B)\n",
+				    job.tasks[i].iosize);
+			    continue;
+		    }
 
-        printf("Filling target zone %d, %zu B I/Os\n",
-               zidx,
-               iosize);
+		    /* lba < 0 means lba is not set, set it to:
+		     * 1) wp for sequential zone
+		     * 2) zone start for conventonal zone 
+		     */
+		    if (job.tasks[i].lba_ofst < 0) {
+			    if ( zbc_zone_sequential(iozone) ) {
+				    job.tasks[i].lba_ofst = 
+					    zbc_zone_wp_lba(iozone) - 
+					    zbc_zone_start_lba(iozone);
+			    } else {
+				    job.tasks[i].lba_ofst = 
+					    zbc_zone_start_lba(iozone);
+			    }
+		    }
 
-    } else {
+		    /* check for sequential write required zone */
+		    if ( zbc_zone_sequential_req(iozone) ) {
+			    if ( zbc_zone_full(iozone) ) {
+				    job.tasks[i].lba_ofst = 
+					    zbc_zone_length(iozone);
+				    job.tasks[i].lba_count = 0;
+			    } else {
+				    job.tasks[i].lba_ofst = 
+					    zbc_zone_wp_lba(iozone) - 
+					    zbc_zone_start_lba(iozone);
+			    }
+		    }
 
-        printf("Writting to target zone %d, %llu I/Os of %zu B\n",
-               zidx,
-               ionum,
-               iosize);
+		    /* Do not exceed the end of the zone */
+		    if ( (job.tasks[i].lba_ofst + job.tasks[i].lba_count) > 
+			 (long long)zbc_zone_length(iozone) ) {
+			    job.tasks[i].lba_count = zbc_zone_length(iozone) -
+				    job.tasks[i].lba_ofst;
+		    }
+		    if ( !job.tasks[i].lba_count ) {
+			    continue;
+		    }
 
-    }
+		    
+		    printf("Writing %u blks to zone %d from"
+			   " lba_offset=%Ld iosize=%zu, (%d/%d)\n",
+			   job.tasks[i].lba_count,
+			   job.tasks[i].zidx,
+			   job.tasks[i].lba_ofst,
+			   job.tasks[i].iosize,
+			   i + 1, job.num);
 
-    /* -lba not set, set it to:
-     * wp for sequential zone
-     * zone start for conventonal zone 
-     */
-    if (lba_ofst < 0) {
-	if ( zbc_zone_sequential(iozone) ) {
-	    lba_ofst = zbc_zone_wp_lba(iozone) - zbc_zone_start_lba(iozone);
-	} else {
-	    lba_ofst = zbc_zone_start_lba(iozone);
-	}
-    }
+		    for (k = 0; k < job.tasks[i].rep; k++){
 
-    if ( zbc_zone_sequential_req(iozone) ) {
-        if ( zbc_zone_full(iozone) ) {
-            lba_ofst = zbc_zone_length(iozone);
-	} else {
-            lba_ofst = zbc_zone_wp_lba(iozone) - zbc_zone_start_lba(iozone);
-	}
-    }
+			    elapsed = zbc_write_zone_usec();
 
-    elapsed = zbc_write_zone_usec();
+			    bcount = 0;
+			    iocount = 0;
+			    lba_count_total = job.tasks[i].lba_count;
+			    lba_ofst = job.tasks[i].lba_ofst;
+			    while (!zbc_write_zone_abort) {
+				    lba_count = job.tasks[i].iosize / 
+					    info.zbd_logical_block_size;
+				    if (lba_count_total < lba_count)
+					    lba_count = lba_count_total;
+				    /* write to zone */
+				    if ( zbc_zone_conventional(iozone) ||
+					 zbc_zone_sequential_pref(iozone)) {
+					    ret = zbc_pwrite(dev, iozone, 
+							     iobuf, 
+							     lba_count, 
+							     lba_ofst);
+				    } else {
+					    ret = zbc_write(dev, iozone, 
+							    iobuf, 
+							    lba_count, 
+							    lba_ofst);
+				    }
 
-    while( ! zbc_write_zone_abort ) {
+				    if (ret > 0)
+					    lba_ofst += ret;
+				    else {
+					    ret = 1;
+					    break;
+				    }
 
-        if ( file ) {
+				    bcount += ret * 
+					    info.zbd_logical_block_size;
+				    iocount++;
 
-	    size_t ios;
 
-            /* Read file */
-            ret = read(fd, iobuf, iosize);
-            if ( ret < 0 ) {
-                fprintf(stderr, "Read file \"%s\" failed %d (%s)\n",
-                        file,
-                        errno,
-                        strerror(errno));
-                ret = 1;
-                break;
-            }
+				    lba_count_total -= ret;
+				    if (lba_count_total <= 0)
+					    break;
+			    }
+			    
+			    elapsed = zbc_write_zone_usec() - elapsed;
 
-            ios = ret;
-            if ( ios < iosize ) {
-                if ( floop ) {
-                    /* Rewind and read remaining of buffer */
-                    lseek(fd, 0, SEEK_SET);
-                    ret = read(fd, iobuf + ios, iosize - ios);
-                    if ( ret < 0 ) {
-                        fprintf(stderr, "Read file \"%s\" failed %d (%s)\n",
-                                file,
-                                errno,
-                                strerror(errno));
-                        ret = 1;
-                        break;
-                    }
-                    ios += ret;
-                } else if ( ios ) {
-                    /* Clear end of buffer */
-                    memset(iobuf + ios, 0, iosize - ios);
-                }
-            }
+			    if ( elapsed ) {
+				    printf("Wrote %llu B (%llu I/Os) in %llu.%03llu sec\n",
+					   bcount,
+					   iocount,
+					   elapsed / 1000000,
+					   (elapsed % 1000000) / 1000);
+				    printf("  IOPS %llu\n",
+					   iocount * 1000000 / elapsed);
+				    brate = bcount * 1000000 / elapsed;
+				    printf("  BW %llu.%03llu MB/s\n",
+					   brate / 1000000,
+					   (brate % 1000000) / 1000);
+			    } else {
+				    printf("Wrote %llu B (%llu I/Os)\n",
+					   bcount,
+					   iocount);
+			    }
 
-            if ( ! ios ) {
-                /* EOF */
-                break;
-            }
-
-        }
-
-        /* Do not exceed the end of the zone */
-        lba_count = iosize / info.zbd_logical_block_size;
-        if ( zbc_zone_sequential_req(iozone) ) {
-            if ( zbc_zone_full(iozone) ) {
-                lba_ofst = zbc_zone_length(iozone);
-                lba_count = 0;
-            } else {
-                lba_ofst = zbc_zone_wp_lba(iozone) - zbc_zone_start_lba(iozone);
-            }
-        }
-        if ( (lba_ofst + lba_count) > (long long)zbc_zone_length(iozone) ) {
-            lba_count = zbc_zone_length(iozone) - lba_ofst;
-        }
-        if ( ! lba_count ) {
-            break;
-        }
-
-        /* Write to zone */
-      	if ( ! lba_count ) {
-	    break;
-	}
-
-        if ( zbc_zone_conventional(iozone) ||
-	     zbc_zone_sequential_pref(iozone)) {
-	    ret = zbc_pwrite(dev, iozone, iobuf, lba_count, lba_ofst);
-        } else {
-	    ret = zbc_write(dev, iozone, iobuf, lba_count, lba_ofst);
-        }
-
-	if ( ret > 0 ) {
-	    lba_ofst += ret;
-	} else {
-            ret = 1;
-            break;
-        }
-
-        bcount += ret * info.zbd_logical_block_size;
-        iocount++;
-
-        if ( (ionum > 0) && (iocount >= ionum) ) {
-            break;
-        }
-
+			    if ( flush ) {
+				    printf("Flushing disk...\n");
+				    ret = zbc_flush(dev);
+				    if ( ret != 0 ) {
+					    fprintf(stderr, 
+						    "zbc_flush failed %d (%s)\n",
+						    -ret,
+						    strerror(-ret));
+					    ret = 1;
+				    }
+			    }
+		    }
+	    }
     }
 
-    elapsed = zbc_write_zone_usec() - elapsed;
-
-    if ( elapsed ) {
-        printf("Wrote %llu B (%llu I/Os) in %llu.%03llu sec\n",
-               bcount,
-               iocount,
-               elapsed / 1000000,
-               (elapsed % 1000000) / 1000);
-        printf("  IOPS %llu\n",
-               iocount * 1000000 / elapsed);
-        brate = bcount * 1000000 / elapsed;
-        printf("  BW %llu.%03llu MB/s\n",
-               brate / 1000000,
-               (brate % 1000000) / 1000);
-    } else {
-        printf("Wrote %llu B (%llu I/Os)\n",
-               bcount,
-               iocount);
-    }
-
-    if ( flush ) {
-        printf("Flushing disk...\n");
-	ret = zbc_flush(dev);
-	if ( ret != 0 ) {
-	    fprintf(stderr, "zbc_flush failed %d (%s)\n",
-		    -ret,
-		    strerror(-ret));
-	    ret = 1;
-	}
-    }
+    free(job.tasks);
+    return 0;
 
 out_failure:
     free(job.tasks);
     return 1;
 
-out_success:
-    free(job.tasks);
-    return 0;
-
-
 out:
 
-    if ( iobuf ) {
+    if (iobuf)
         free(iobuf);
-    }
 
-    if ( fd > 0 ) {
+    if (fd > 0)
         close(fd);
-    }
 
-    if ( zones ) {
+    if (zones)
         free(zones);
-    }
 
     zbc_close(dev);
-    
     free(job.tasks);
-
-    return( ret );
-
+    return ret;
 }
 
