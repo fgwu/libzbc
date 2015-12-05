@@ -442,7 +442,7 @@ usage:
 	     zbc_zone_sequential_pref(iozone)) {
 	    ret = zbc_pwrite(dev, iozone, iobuf, lba_count, lba_ofst);
         } else {
-	    ret = zbc_write(dev, iozone, iobuf, lba_count, lba_ofst);
+	    ret = zbc_write(dev, iozone, iobuf, lba_count);
         }
 
 	if ( ret > 0 ) {

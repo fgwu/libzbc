@@ -758,8 +758,9 @@ zbc_pread(zbc_device_t *dev,
  * This an the equivalent to pwrite(2) that operates on a ZBC device handle,
  * and uses LBA addressing for the buffer length. It attempts to writes in the
  * zone (@zone) at the offset (@lba_ofst).
- * The disk write pointer may be updated in case of a succesful call, but this function
- * does not updates the write pointer value of @zone.
+ * The disk write pointer may be updated in case of a succesful call,
+ * and this funciton will update the write pointer value of @zone accordingly
+ * if @zone is a sequential zone.
  *
  * All errors returned by write(2) can be returned. On success, the number of
  * logical blocks written is returned.
@@ -772,13 +773,11 @@ zbc_pwrite(zbc_device_t *dev,
            uint64_t lba_ofst)
 {
     ssize_t ret = -EFAULT;
-
     if ( dev && zone && buf ) {
-
 	if ( lba_count ) {
-
 	    /* Execute write */
-	    ret = (dev->zbd_ops->zbd_pwrite)(dev, zone, buf, lba_count, lba_ofst);
+	    ret = (dev->zbd_ops->zbd_pwrite)(dev, zone, buf, 
+					     lba_count, lba_ofst);
 	    if ( ret <= 0 ) {
 		zbc_error("Write %u blocks at block %llu + %llu failed %zd (%s)\n",
 			  lba_count,
@@ -786,18 +785,21 @@ zbc_pwrite(zbc_device_t *dev,
 			  (unsigned long long) lba_ofst,
 			  ret,
 			  strerror(-ret));
+	    } else {
+		    /* 
+		     * if the write happen at the wp of a sequential zone
+		     * the wp in @zone is updated.
+		     */
+		    if (zbc_zone_sequential(zone) &&
+			lba_ofst == 
+			zbc_zone_wp_lba(zone) - zbc_zone_start_lba(zone))
+			    zbc_zone_wp_lba_inc(zone, ret);
 	    }
-
 	} else {
-
 	    ret = 0;
-
 	}
-
     }
-
-    return( ret );
-
+    return ret;
 }
 
 /**
@@ -821,36 +823,18 @@ int32_t
 zbc_write(struct zbc_device *dev,
           struct zbc_zone *zone,
           const void *buf,
-          uint32_t lba_count,
-          uint64_t lba_ofst)
+          uint32_t lba_count)
 {
     int ret = -EINVAL;
 
-    if (! zbc_zone_full(zone)) {
-
-	if (zbc_zone_sequential_req(zone))
+    if (zbc_zone_sequential(zone) && !zbc_zone_full(zone))
 	    ret = zbc_pwrite(dev,
 			     zone,
 			     buf,
 			     lba_count,
 			     zbc_zone_wp_lba(zone) - zbc_zone_start_lba(zone));
 	
-
-	if ( zbc_zone_sequential_pref(zone))
-	    ret = zbc_pwrite(dev,
-			     zone,
-			     buf,
-			     lba_count,
-			     lba_ofst);
-	
-        if ( ret > 0 ) {
-            zbc_zone_wp_lba_inc(zone, ret);
-        }
-
-    }
-
-    return( ret );
-
+    return ret;
 }
 
 /**

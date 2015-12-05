@@ -485,8 +485,9 @@ zbc_pread(struct zbc_device *dev,
  * This an the equivalent to pwrite(2) that operates on a ZBC device handle,
  * and uses LBA addressing for the buffer length. It attempts to writes in the
  * zone (@zone) at the offset (@lba_ofst).
- * The disk write pointer may be updated in case of a succesful call, but this function
- * does not updates the write pointer value of @zone.
+ * The disk write pointer may be updated in case of a succesful call, 
+ * and it will update the write pointer value of @zone if its a sequential
+ * written zone.
  *
  * All errors returned by write(2) can be returned. On success, the number of
  * logical blocks written is returned.
@@ -519,8 +520,7 @@ extern int32_t
 zbc_write(struct zbc_device *dev,
           struct zbc_zone *zone,
           const void *buf,
-          uint32_t lba_count,
-          uint64_t lba_ofst);
+          uint32_t lba_count);
 
 /**
  * zbc_flush - flush to a ZBC device cache

@@ -77,7 +77,7 @@ zbc_write_zone_sigcatcher(int sig)
  * Fenggang wu
  */
 #define MAX_LEN 90
-#define MAX_LINE_NO 50
+#define MAX_LINE_NO 1000
 
 
 /**
@@ -350,79 +350,75 @@ usage:
 			    continue;
 		    }
 
-		    /* lba < 0 means lba is not set, set it to:
-		     * 1) wp for sequential zone
-		     * 2) zone start for conventonal zone 
-		     */
-		    if (job.tasks[i].lba_ofst < 0) {
-			    if ( zbc_zone_sequential(iozone) ) {
-				    job.tasks[i].lba_ofst = 
-					    zbc_zone_wp_lba(iozone) - 
-					    zbc_zone_start_lba(iozone);
-			    } else {
-				    job.tasks[i].lba_ofst = 
-					    zbc_zone_start_lba(iozone);
-			    }
-		    }
-
-		    /* check for sequential write required zone */
-		    if ( zbc_zone_sequential_req(iozone) ) {
-			    if ( zbc_zone_full(iozone) ) {
-				    job.tasks[i].lba_ofst = 
-					    zbc_zone_length(iozone);
-				    job.tasks[i].lba_count = 0;
-			    } else {
-				    job.tasks[i].lba_ofst = 
-					    zbc_zone_wp_lba(iozone) - 
-					    zbc_zone_start_lba(iozone);
-			    }
-		    }
-
-		    /* Do not exceed the end of the zone */
-		    if ( (job.tasks[i].lba_ofst + job.tasks[i].lba_count) > 
-			 (long long)zbc_zone_length(iozone) ) {
-			    job.tasks[i].lba_count = zbc_zone_length(iozone) -
-				    job.tasks[i].lba_ofst;
-		    }
-		    if ( !job.tasks[i].lba_count ) {
-			    continue;
-		    }
-
-		    
-		    printf("Writing %u blks to zone %d from"
-			   " lba_offset=%Ld iosize=%zu, (%d/%d)\n",
-			   job.tasks[i].lba_count,
-			   job.tasks[i].zidx,
-			   job.tasks[i].lba_ofst,
-			   job.tasks[i].iosize,
-			   i + 1, job.num);
-
 		    for (k = 0; k < job.tasks[i].rep; k++){
+			    printf("Writing %u blks to zone %d from"
+				   " lba_offset=%Ld iosize=%zu, (%d/%d)\n",
+				   job.tasks[i].lba_count,
+				   job.tasks[i].zidx,
+				   job.tasks[i].lba_ofst,
+				   job.tasks[i].iosize,
+				   k + 1, job.tasks[i].rep);
+
+			    printf("  type 0x%x (%s), cond 0x%x (%s), need_reset %d, non_seq %d, LBA %llu, %llu sectors, wp %llu\n",
+				   zbc_zone_type(iozone),
+				   zbc_zone_type_str(zbc_zone_type(iozone)),
+				   zbc_zone_condition(iozone),
+				   zbc_zone_condition_str(zbc_zone_condition(iozone)),
+				   zbc_zone_need_reset(iozone),
+				   zbc_zone_non_seq(iozone),
+				   zbc_zone_start_lba(iozone),
+				   zbc_zone_length(iozone),
+				   zbc_zone_wp_lba(iozone));
+
+			    lba_ofst = job.tasks[i].lba_ofst;
+			    lba_count = job.tasks[i].lba_count;
+
+			    /* lba < 0 means lba is not set, set it to:
+			     * 1) wp for sequential zone
+			     * 2) zone start for conventonal zone 
+			     */
+			    if (job.tasks[i].lba_ofst < 0) {
+				    if ( zbc_zone_sequential(iozone) ) {
+					    lba_ofst = zbc_zone_wp_lba(iozone) - 
+						    zbc_zone_start_lba(iozone);
+				    } else {
+					    lba_ofst = zbc_zone_start_lba(iozone);
+				    }
+			    }
+
+			    /* check for sequential write required zone */
+			    if ( zbc_zone_sequential_req(iozone) ) {
+				    if ( zbc_zone_full(iozone) ) {
+					    lba_ofst = zbc_zone_length(iozone);
+					    lba_count = 0;
+				    } else {
+					    lba_ofst = zbc_zone_wp_lba(iozone) - 
+						    zbc_zone_start_lba(iozone);
+				    }
+			    }
+
+			    /* Do not exceed the end of the zone */
+			    if ((lba_ofst + lba_count) > 
+				(long long)zbc_zone_length(iozone) ) {
+				    lba_count = zbc_zone_length(iozone) - lba_ofst;
+			    }
+			    if (!lba_count) {
+				    continue;
+			    }
 
 			    elapsed = zbc_write_zone_usec();
 
 			    bcount = 0;
 			    iocount = 0;
-			    lba_count_total = job.tasks[i].lba_count;
-			    lba_ofst = job.tasks[i].lba_ofst;
+			    lba_count_total = lba_count;
 			    while (!zbc_write_zone_abort) {
 				    lba_count = job.tasks[i].iosize / 
 					    info.zbd_logical_block_size;
 				    if (lba_count_total < lba_count)
 					    lba_count = lba_count_total;
 				    /* write to zone */
-				    if ( zbc_zone_conventional(iozone) ||
-					 zbc_zone_sequential_pref(iozone)) {
-					    ret = zbc_pwrite(dev, iozone, 
-							     iobuf, 
-							     lba_count, 
-							     lba_ofst);
-				    } else {
-					    ret = zbc_write(dev, iozone, 
-							    iobuf, 
-							    lba_count, 
-							    lba_ofst);
-				    }
+				    ret = zbc_pwrite(dev, iozone, iobuf, 
+						     lba_count, lba_ofst);
 
 				    if (ret > 0)
 					    lba_ofst += ret;
