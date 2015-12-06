@@ -49,6 +49,19 @@
  */
 #define ZBC_UNRESTRICTED_READ   0x00000001
 
+
+/**
+ * Negative lba_offset when writting to a zone means LBA not set.
+ * The writer will set the lba according to the meaning of the macro.
+ * see: zbc_write_zone2.c
+ * Fenggang Wu
+ */
+#define ZBC_LBA_OFFSET_WP -1
+#define ZBC_LBA_OFFSET_RAND -2
+#define ZBC_ZONE_RAND -1       /* random zone id */
+#define ZBC_ZONE_RAND_SMR -2   /* random smr zone id */
+#define ZBC_ZONE_CONV_NUM 64
+
 /**
  * Device type: SCSI, ATA or fake (emulation).
  * Each type correspond to a different internal backend driver.

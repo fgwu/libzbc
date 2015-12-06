@@ -34,7 +34,7 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <linux/fs.h>
-#include <inttypes.h>
+#include <time.h>
 
 #include <libzbc/zbc.h>
 
@@ -77,7 +77,7 @@ zbc_write_zone_sigcatcher(int sig)
  * Fenggang wu
  */
 #define MAX_LEN 90
-#define MAX_LINE_NO 1000
+#define MAX_LINE_NO 5000
 
 
 /**
@@ -173,6 +173,7 @@ main(int argc,
     long long lba_ofst;
     char *script_file = NULL;
     int flush = 0;
+    int zidx;
 
     struct job_struct job;
     int num_run = 1; /*repeat num_run times for the script*/
@@ -291,10 +292,28 @@ usage:
     for(j = 0; j < num_run; j++){
 	    printf("------processing script (%d/%d)------\n", j + 1, num_run);
 	    for (i = 0; i < job.num; i++){
-		    if (job.tasks[i].zidx < 0 ) {
-			    printf("skip invalid zone number %d\n",
-				   job.tasks[i].zidx);
-			    continue;
+		    zidx = job.tasks[i].zidx;
+
+		    /*
+		     * zidx < 0 means the zone id is not set. 
+		     * zidx will be set accordingly w.r.p with the macro:
+		     * 1) ZBC_ZONE_RAND: any zone in the drive
+		     * 2) ZBC_ZONE_RAND_SMR: any smr zone in the drive
+		     */
+		    if (zidx < 0 ) {
+			    if (zidx == ZBC_ZONE_RAND){
+				    srand(time(NULL));
+				    zidx = rand()%nr_zones;
+			    } else if(zidx == ZBC_ZONE_RAND_SMR){
+				    srand(time(NULL));
+				    zidx = ZBC_ZONE_CONV_NUM + 
+					    rand()%(nr_zones - 
+						    ZBC_ZONE_CONV_NUM);
+			    } else {
+				    printf("skip invalid zone number %d\n",
+					   job.tasks[i].zidx);
+				    continue;
+			    }
 		    }
 
 		    if ( ! job.tasks[i].iosize ) {
@@ -305,15 +324,15 @@ usage:
 
 
 		    /* Get target zone */
-		    if ( job.tasks[i].zidx >= (int)nr_zones ) {
+		    if ( zidx >= (int)nr_zones ) {
 			    printf("skip zone %d: not found\n", 
-				   job.tasks[i].zidx);
+				   zidx);
 			    continue;
 		    }
-		    iozone = &zones[job.tasks[i].zidx];
+		    iozone = &zones[zidx];
 
 		    printf("Target zone: Zone %d / %d, type 0x%x (%s), cond 0x%x (%s), need_reset %d, non_seq %d, LBA %llu, %llu sectors, wp %llu\n",
-			   job.tasks[i].zidx,
+			   zidx,
 			   nr_zones,
 			   zbc_zone_type(iozone),
 			   zbc_zone_type_str(zbc_zone_type(iozone)),
@@ -351,38 +370,55 @@ usage:
 		    }
 
 		    for (k = 0; k < job.tasks[i].rep; k++){
-			    printf("Writing %u blks to zone %d from"
-				   " lba_offset=%Ld iosize=%zu, (%d/%d)\n",
-				   job.tasks[i].lba_count,
-				   job.tasks[i].zidx,
-				   job.tasks[i].lba_ofst,
-				   job.tasks[i].iosize,
-				   k + 1, job.tasks[i].rep);
-
-			    printf("  type 0x%x (%s), cond 0x%x (%s), need_reset %d, non_seq %d, LBA %llu, %llu sectors, wp %llu\n",
-				   zbc_zone_type(iozone),
-				   zbc_zone_type_str(zbc_zone_type(iozone)),
-				   zbc_zone_condition(iozone),
-				   zbc_zone_condition_str(zbc_zone_condition(iozone)),
-				   zbc_zone_need_reset(iozone),
-				   zbc_zone_non_seq(iozone),
-				   zbc_zone_start_lba(iozone),
-				   zbc_zone_length(iozone),
-				   zbc_zone_wp_lba(iozone));
 
 			    lba_ofst = job.tasks[i].lba_ofst;
 			    lba_count = job.tasks[i].lba_count;
-
-			    /* lba < 0 means lba is not set, set it to:
-			     * 1) wp for sequential zone
-			     * 2) zone start for conventonal zone 
+			    
+			    /*
+			     * lba < 0 means lba is not set.
+			     * There are two cases:
+			     * 1) if lba == ZBC_LBA_OFFSET_WP, then set to
+			     *    - zone start, for conventional zones
+			     *    - wp, for smr zones
+			     * 2) if lba == ZBC_LBA_OFFSET_RAND, then set to 
+			     *    - random offset within zone, for conv. zones
+			     *    - random offset within zone, for seq pref
+			     *    - wp, for seq required zones.
 			     */
 			    if (job.tasks[i].lba_ofst < 0) {
-				    if ( zbc_zone_sequential(iozone) ) {
-					    lba_ofst = zbc_zone_wp_lba(iozone) - 
-						    zbc_zone_start_lba(iozone);
+				    if ( job.tasks[i].lba_ofst == 
+					 ZBC_LBA_OFFSET_WP){
+					    if (zbc_zone_sequential(iozone)) 
+						    lba_ofst = zbc_zone_wp_lba(
+								    iozone) - 
+							    zbc_zone_start_lba(
+								    iozone);
+					    else 
+						    lba_ofst = 
+							    zbc_zone_start_lba(
+								    iozone);
+				    } else if(job.tasks[i].lba_ofst ==
+					      ZBC_LBA_OFFSET_RAND){
+					    if (zbc_zone_sequential_req(iozone))
+						    lba_ofst = zbc_zone_wp_lba(
+							    iozone) - 
+							    zbc_zone_start_lba(
+								    iozone);
+					    else {/* for conv and seq_pref */
+						    srand(time(NULL));
+						    lba_ofst = rand() % 
+							    zbc_zone_length(
+								    iozone);
+					    }
 				    } else {
-					    lba_ofst = zbc_zone_start_lba(iozone);
+					    fprintf(stderr, "Warning: Illegal"
+						    "lba_ofst(%lld), "
+						    "set it to wp\n", 
+						    job.tasks[i].lba_ofst);
+				    		    lba_ofst = zbc_zone_wp_lba(
+							    iozone) - 
+							    zbc_zone_start_lba(
+								    iozone);
 				    }
 			    }
 
@@ -405,6 +441,26 @@ usage:
 			    if (!lba_count) {
 				    continue;
 			    }
+
+			    printf("Writing %u blks to zone %d from"
+				   " lba_offset=%Ld iosize=%zu, (%d/%d)\n",
+				   lba_count,
+				   zidx,
+				   lba_ofst,
+				   job.tasks[i].iosize,
+				   k + 1, job.tasks[i].rep);
+
+			    printf("zone type 0x%x (%s), cond 0x%x (%s), need_reset %d, non_seq %d, LBA %llu, %llu sectors, wp %llu\n\n",
+				   zbc_zone_type(iozone),
+				   zbc_zone_type_str(zbc_zone_type(iozone)),
+				   zbc_zone_condition(iozone),
+				   zbc_zone_condition_str(zbc_zone_condition(iozone)),
+				   zbc_zone_need_reset(iozone),
+				   zbc_zone_non_seq(iozone),
+				   zbc_zone_start_lba(iozone),
+				   zbc_zone_length(iozone),
+				   zbc_zone_wp_lba(iozone));
+
 
 			    elapsed = zbc_write_zone_usec();
 

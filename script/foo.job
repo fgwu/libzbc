@@ -1,8 +1,11 @@
 # format: 
 # zone_id lba_offset lba_count IO_size(B) repeat_times
+# Note:  lba_offset == -1 means wp, lba_offset == -2 means rand
+#         zond_id == -2 means rand
 #3000 -1 4 4096 10
 #67 -1 16 8192 10 # lba_offset = -1 means write to wp
 #67 -1 32 8192 10 # lba_offset = -1 means write to wp
 #65 0 16 4096 1
-
 #64 0 8192 524288 1
+-2 -2 128 65536 1
+
