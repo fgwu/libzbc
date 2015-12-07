@@ -178,17 +178,18 @@ main(int argc,
     struct job_struct job;
     int num_run = 1; /*repeat num_run times for the script*/
 
+	job.tasks = NULL; /* initialize the job.tasks to NULL */
+	
     /* Check command line */
-    if ( argc < 4 ) {
+    if ( argc < 5 ) {
 usage:
-        printf("Usage: %s [options] <dev> <zone no> <I/O size (B)>\n"
-               "  Write into a zone from the current write pointer until\n"
-               "  the zone is full or the number of I/O specified is executed\n"
+        printf("Usage: %s [options] <dev>\n"
+               "  Write into zone(s) based on the specified <script>\n"
                "Options:\n"
-               "    -v         : Verbose mode\n"
-               "    -s         : (sync) Run zbc_flush after writing\n"
-	       "    -p <script>: the script to be processed.\n"
-	       "    -k <num_run>: repeat the script for num_run times",
+               "    -v          : verbose mode\n"
+               "    -s          : (sync) Run zbc_flush after writing\n"
+			   "    -p <script> : the <script> to be processed\n"
+			   "    -k <num_run>: repeat the script for <num_run> times\n",
                argv[0]);
 	goto out_failure;
     }
@@ -538,7 +539,10 @@ usage:
     return 0;
 
 out_failure:
-    free(job.tasks);
+	if(job.tasks != NULL)
+	{
+		free(job.tasks);
+	}
     return 1;
 
 out:
