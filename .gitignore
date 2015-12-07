@@ -99,3 +99,10 @@ tools/lkvs/m4/lt~obsolete.m4
 
 cscope*
 TAGS
+
+bench/*log
+bench/*/*log
+bench/*job
+bench/*/*job
+bench/*csv
+bench/*/*csv

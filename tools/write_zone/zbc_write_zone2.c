@@ -289,6 +289,8 @@ usage:
 	   (double) (info.zbd_physical_blocks * info.zbd_physical_block_size) / 1000000000);
 
 
+    srand(time(NULL));
+
     for(j = 0; j < num_run; j++){
 	    printf("------processing script (%d/%d)------\n", j + 1, num_run);
 	    for (i = 0; i < job.num; i++){
@@ -302,10 +304,8 @@ usage:
 		     */
 		    if (zidx < 0 ) {
 			    if (zidx == ZBC_ZONE_RAND){
-				    srand(time(NULL));
 				    zidx = rand()%nr_zones;
 			    } else if(zidx == ZBC_ZONE_RAND_SMR){
-				    srand(time(NULL));
 				    zidx = ZBC_ZONE_CONV_NUM + 
 					    rand()%(nr_zones - 
 						    ZBC_ZONE_CONV_NUM);
@@ -405,10 +405,11 @@ usage:
 							    zbc_zone_start_lba(
 								    iozone);
 					    else {/* for conv and seq_pref */
-						    srand(time(NULL));
 						    lba_ofst = rand() % 
 							    zbc_zone_length(
 								    iozone);
+						    printf("lba_ofst=%lld\n",
+							   lba_ofst);
 					    }
 				    } else {
 					    fprintf(stderr, "Warning: Illegal"
@@ -422,14 +423,19 @@ usage:
 				    }
 			    }
 
-			    /* check for sequential write required zone */
-			    if ( zbc_zone_sequential_req(iozone) ) {
+			    /* check for sequential write zone */
+			    if ( zbc_zone_sequential(iozone) ) {
 				    if ( zbc_zone_full(iozone) ) {
 					    lba_ofst = zbc_zone_length(iozone);
 					    lba_count = 0;
 				    } else {
-					    lba_ofst = zbc_zone_wp_lba(iozone) - 
-						    zbc_zone_start_lba(iozone);
+					    if ( zbc_zone_sequential_req(
+							 iozone) ) {
+						    lba_ofst = zbc_zone_wp_lba(
+							    iozone) - 
+							    zbc_zone_start_lba(
+								    iozone);
+					    }
 				    }
 			    }
 
