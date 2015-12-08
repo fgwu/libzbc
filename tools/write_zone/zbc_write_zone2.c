@@ -178,7 +178,7 @@ main(int argc,
 	job.tasks = NULL; /* initialize the job.tasks to NULL */
 	
     /* Check command line */
-    if ( argc < 5 ) {
+    if ( argc < 3 ) {
 usage:
         printf("Usage: %s [options] <dev>\n"
                "  Write into zone(s) based on the specified <script>\n"
