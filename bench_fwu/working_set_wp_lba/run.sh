@@ -27,4 +27,4 @@ mv temp.csv $result_file
 echo cp $result_file ~
 cp $result_file ~
 #tar cf ~/bw_rand_large.tar *.csv
-#rm *.csv *.log *.job
+rm *.csv *.log *.job

@@ -100,12 +100,8 @@ tools/lkvs/m4/lt~obsolete.m4
 cscope*
 TAGS
 
-bench/*log
-bench/*/*log
-bench/*job
-bench/*/*job
-bench/*csv
-bench/*/*csv
+bench-fwu/*/*log
+bench-fwu/*/*csv
+bench-fwu/*/*job
 
-bench/*tar
-bench/*/*tar
+bench-fwu/non_seq_bit/*log
