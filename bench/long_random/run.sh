@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bench_bin=~/bench
+bench_bin=~/libzbc/bench
 
 if [ $# -ne 1 ]
 then
@@ -16,8 +16,8 @@ sample_num=$1
 #result_file="long_rand.csv"
 result_file=bw_long_rand_$sample_num.csv
 echo "" > $result_file
-echo -2 -2 1024 524288 1
-echo -2 -2 1024 524288 1 > rand.job
+echo -2 -2 1024 1
+echo -2 -2 1024 1 > rand.job
 echo $bench_bin/zbc_write_zone2 -p rand.job -k $sample_num /dev/sdb
 $bench_bin/zbc_write_zone2 -p rand.job -k $sample_num /dev/sdb > rand_$sample_num.log
 #$bench_bin/reset_write_ptr_all.sh /dev/sdb > /dev/null

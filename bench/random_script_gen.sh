@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ $# -ne  4 ]
+if [ $# -ne  3 ]
 then
-    echo Usage $0 [line_num] [lba_offset] [lba_count] [iosize_in_Bytes]
+    echo Usage $0 [line_num] [lba_offset] [lba_count]
     echo lba: -1 wp, -2 rand, -3 fixed
     exit -1
 fi
@@ -12,9 +12,9 @@ do
     if [ $2 -eq -3 ]
     then
 	# we fix the set of zones, and the same offset each run
-	echo `shuf -i 64-29809 -n 1` `shuf -i 0-523263 -n 1` $3 $4 1
+	echo `shuf -i 64-29809 -n 1` `shuf -i 0-523263 -n 1` $3  1
     else
 	# we fix the set of zones, but have rand offset each time.
-	echo `shuf -i 64-29809 -n 1` $2 $3 $4 1 
+	echo `shuf -i 64-29809 -n 1` $2 $3  1 
     fi
 done

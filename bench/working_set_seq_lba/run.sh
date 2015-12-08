@@ -6,8 +6,8 @@ result_file="bw_seq_20_20_200.csv"
 echo "" > $result_file
 for i in 20 40 60 80 100 120 140 160 180 200
 do
-    echo  $bench_bin/seq_script_gen.sh $i 1024 524288
-    $bench_bin/seq_script_gen.sh $i  1024 524288 > $i.job
+    echo  $bench_bin/seq_script_gen.sh $i 1024 
+    $bench_bin/seq_script_gen.sh $i  1024  > $i.job
     echo $bench_bin/zbc_write_zone2 -p $i.job -k $((1000/$i)) /dev/sdb
     $bench_bin/zbc_write_zone2 -p $i.job -k $((1000/$i)) /dev/sdb > $i.log
     $bench_bin/reset_write_ptr_all.sh /dev/sdb > /dev/null

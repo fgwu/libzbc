@@ -63,6 +63,13 @@
 #define ZBC_ZONE_CONV_NUM 64
 
 /**
+ * Maxnum lba that can be written into SMR
+ * 512K = 1024 logical blocks
+ * Fenggang Wu
+ */
+#define ZBC_MAX_LBA_CNT 1024
+
+/**
  * Device type: SCSI, ATA or fake (emulation).
  * Each type correspond to a different internal backend driver.
  */

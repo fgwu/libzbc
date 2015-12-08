@@ -12,8 +12,8 @@ for i in 20 40 60 80 100 120 140 160 180 200
 #for i in 70 71 72 73 74 75 76 77 78 79 80
 #for i in `seq 1 20`
 do
-    echo  $bench_bin/random_script_gen.sh $i -1 1024 524288
-    $bench_bin/random_script_gen.sh $i -1 1024 524288 > rand_large_$i.job
+    echo  $bench_bin/random_script_gen.sh $i -1 1024 
+    $bench_bin/random_script_gen.sh $i -1 1024  > rand_large_$i.job
     echo $bench_bin/zbc_write_zone2 -p rand_large_$i.job -k $((1000/$i)) /dev/sdb
     $bench_bin/zbc_write_zone2 -p rand_large_$i.job -k $((1000/$i)) /dev/sdb > rand_large_$i.log
     $bench_bin/reset_write_ptr_all.sh /dev/sdb > /dev/null

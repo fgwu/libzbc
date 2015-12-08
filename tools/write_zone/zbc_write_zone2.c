@@ -95,7 +95,6 @@ struct task_struct {
 	int zidx; /* zone index */
 	long long lba_ofst;
 	uint32_t lba_count; 
-	size_t iosize; /* in B */
 	int rep; /* time to repeat */
 };
 
@@ -117,7 +116,7 @@ parse_script(
 	job->tasks = malloc(sizeof(struct task_struct) * MAX_LINE_NO);
 
 	if ((fp = fopen(script_file, "r")) == NULL) {
-		printf("unable to open script_file:%s\n", script_file);
+		fprintf(stderr,"unable to open script_file:%s\n", script_file);
 		return -1;
 	}
 
@@ -125,19 +124,17 @@ parse_script(
 	{
 		if (line[0] == '#')
 			continue;
-		if (5 != sscanf(line, "%d %Ld %u %zu %d", 
+		if (4 != sscanf(line, "%d %Ld %u %d", 
 				&job->tasks[i].zidx,
 				&job->tasks[i].lba_ofst,
 				&job->tasks[i].lba_count,
-				&job->tasks[i].iosize,
 				&job->tasks[i].rep))
 			continue;
 
-		printf("%d %Ld %u %zu %d\n",
+		printf("%d %Ld %u %d\n",
 		       job->tasks[i].zidx,
 		       job->tasks[i].lba_ofst,
 		       job->tasks[i].lba_count,
-		       job->tasks[i].iosize,
 		       job->tasks[i].rep);
 		++i;
 	}
@@ -169,7 +166,7 @@ main(int argc,
     struct zbc_zone *iozone = NULL;
     unsigned int nr_zones;
     char *path;
-    uint32_t lba_count, lba_count_total;
+    uint32_t lba_count;
     long long lba_ofst;
     char *script_file = NULL;
     int flush = 0;
@@ -181,7 +178,7 @@ main(int argc,
     /* Check command line */
     if ( argc < 4 ) {
 usage:
-        printf("Usage: %s [options] <dev> <zone no> <I/O size (B)>\n"
+        printf("Usage: %s [options] <dev> >\n"
                "  Write into a zone from the current write pointer until\n"
                "  the zone is full or the number of I/O specified is executed\n"
                "Options:\n"
@@ -238,7 +235,7 @@ usage:
 
     printf("parsing script file: %s\n", script_file);
     if (parse_script(&job, script_file) < 0){
-	    printf("error parsing script file %s\n", script_file);
+	    fprintf(stderr,"error parsing script file %s\n", script_file);
 	    goto out_failure;
     }
 
@@ -310,22 +307,15 @@ usage:
 					    rand()%(nr_zones - 
 						    ZBC_ZONE_CONV_NUM);
 			    } else {
-				    printf("skip invalid zone number %d\n",
+				    fprintf(stderr,"skip invalid zone number %d\n",
 					   job.tasks[i].zidx);
 				    continue;
 			    }
 		    }
 
-		    if ( ! job.tasks[i].iosize ) {
-			    printf("skip invalid I/O size %zu\n",
-				    job.tasks[i].iosize );
-			    continue;
-		    }
-
-
 		    /* Get target zone */
 		    if ( zidx >= (int)nr_zones ) {
-			    printf("skip zone %d: not found\n", 
+			    fprintf(stderr,"skip zone %d: not found\n", 
 				   zidx);
 			    continue;
 		    }
@@ -344,29 +334,40 @@ usage:
 			   zbc_zone_length(iozone),
 			   zbc_zone_wp_lba(iozone));
 		    
-
+		    /* Check the IO size */
+		    if (job.tasks[i].lba_count > ZBC_MAX_LBA_CNT){
+			    fprintf(stderr,"skip: io size connot be larger than 512K"
+				   " (lba_count <= 1024)");
+			    continue;
+		    } 
 
 		    /* Check I/O size alignment */
 		    if ( zbc_zone_sequential(iozone)){
 			    ioalign = info.zbd_physical_block_size;
+			    /* Get an I/O buffer */
+			    if(posix_memalign((void **) &iobuf, ioalign, 
+						 job.tasks[i].lba_count * 
+					      info.zbd_physical_block_size)){
+				    fprintf(stderr,"skip: no memory for I/O buffer"
+					   " (%u B)\n",
+					   job.tasks[i].lba_count * 
+					   info.zbd_physical_block_size);
+				    continue;
+			    }
+
+
 		    } else {
 			    ioalign = info.zbd_logical_block_size;
-		    }
-		    if ( job.tasks[i].iosize % ioalign ) {
-			    printf("skip invalid I/O size %zu "
-				   "(must be aligned on %zu)\n",
-				   job.tasks[i].iosize,
-				   ioalign);
-			    continue;
-		    }
-
-		    /* Get an I/O buffer */
-		    ret = posix_memalign((void **) &iobuf, ioalign, 
-					 job.tasks[i].iosize);
-		    if ( ret != 0 ) {
-			    printf("skip: no memory for I/O buffer (%zu B)\n",
-				    job.tasks[i].iosize);
-			    continue;
+			    /* Get an I/O buffer */
+			    if(posix_memalign((void **) &iobuf, ioalign, 
+						 job.tasks[i].lba_count * 
+					      info.zbd_logical_block_size)){
+				    fprintf(stderr,"skip: no memory for I/O buffer"
+					   " (%u B)\n",
+					   job.tasks[i].lba_count * 
+					   info.zbd_logical_block_size);
+				    continue;
+			    }
 		    }
 
 		    for (k = 0; k < job.tasks[i].rep; k++){
@@ -408,8 +409,6 @@ usage:
 						    lba_ofst = rand() % 
 							    zbc_zone_length(
 								    iozone);
-						    printf("lba_ofst=%lld\n",
-							   lba_ofst);
 					    }
 				    } else {
 					    fprintf(stderr, "Warning: Illegal"
@@ -449,11 +448,10 @@ usage:
 			    }
 
 			    printf("Writing %u blks to zone %d from"
-				   " lba_offset=%Ld iosize=%zu, (%d/%d)\n",
+				   " lba_offset=%Ld (%d/%d)\n",
 				   lba_count,
 				   zidx,
 				   lba_ofst,
-				   job.tasks[i].iosize,
 				   k + 1, job.tasks[i].rep);
 
 			    printf("zone type 0x%x (%s), cond 0x%x (%s), need_reset %d, non_seq %d, LBA %llu, %llu sectors, wp %llu\n\n",
@@ -470,33 +468,29 @@ usage:
 
 			    elapsed = zbc_write_zone_usec();
 
-			    bcount = 0;
-			    iocount = 0;
-			    lba_count_total = lba_count;
-			    while (!zbc_write_zone_abort) {
-				    lba_count = job.tasks[i].iosize / 
-					    info.zbd_logical_block_size;
-				    if (lba_count_total < lba_count)
-					    lba_count = lba_count_total;
+
+			    if (!zbc_write_zone_abort) {
 				    /* write to zone */
 				    ret = zbc_pwrite(dev, iozone, iobuf, 
 						     lba_count, lba_ofst);
-
-				    if (ret > 0)
-					    lba_ofst += ret;
-				    else {
-					    ret = 1;
-					    break;
+				    
+				    if (ret < 0){
+					    fprintf(stderr, 
+						    "warning: write fails\n");
+					    continue;
 				    }
 
-				    bcount += ret * 
+				    if ((unsigned int)ret < lba_count){
+					    fprintf(stderr, 
+						    "warning: writing %u blks"
+						    " but only %u written\n", 
+						    lba_count, ret);
+				    }
+
+
+				    bcount = ret * 
 					    info.zbd_logical_block_size;
-				    iocount++;
-
-
-				    lba_count_total -= ret;
-				    if (lba_count_total <= 0)
-					    break;
+				    iocount = 1;
 			    }
 			    
 			    elapsed = zbc_write_zone_usec() - elapsed;

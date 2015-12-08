@@ -106,3 +106,6 @@ bench/*job
 bench/*/*job
 bench/*csv
 bench/*/*csv
+
+bench/*tar
+bench/*/*tar
