@@ -77,7 +77,7 @@ zbc_write_zone_sigcatcher(int sig)
  * Fenggang wu
  */
 #define MAX_LEN 90
-#define MAX_LINE_NO 5000
+#define MAX_LINE_NO 1048576
 
 
 /**
@@ -494,6 +494,18 @@ usage:
 				    iocount = 1;
 			    }
 			    
+			    if ( flush ) {
+				    printf("Flushing disk...\n");
+				    ret = zbc_flush(dev);
+				    if ( ret != 0 ) {
+					    fprintf(stderr, 
+						    "zbc_flush failed %d (%s)\n",
+						    -ret,
+						    strerror(-ret));
+					    ret = 1;
+				    }
+			    }
+				
 			    elapsed = zbc_write_zone_usec() - elapsed;
 
 			    if ( elapsed ) {
@@ -514,17 +526,6 @@ usage:
 					   iocount);
 			    }
 
-			    if ( flush ) {
-				    printf("Flushing disk...\n");
-				    ret = zbc_flush(dev);
-				    if ( ret != 0 ) {
-					    fprintf(stderr, 
-						    "zbc_flush failed %d (%s)\n",
-						    -ret,
-						    strerror(-ret));
-					    ret = 1;
-				    }
-			    }
 		    }
 	    }
     }
