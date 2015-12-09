@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bench_bin=~/libzbc/bench
+bench_bin=~/libzbc/bench_fwu
 
 if [ $# -ne 1 ]
 then
