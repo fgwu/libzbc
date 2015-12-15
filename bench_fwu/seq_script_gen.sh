@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -ne  3 ]
+if [ $# -ne  2 ]
 then
     echo Usage $0 [line_num] [lba_count]
     exit -1

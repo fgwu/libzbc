@@ -1,0 +1,51 @@
+Last login: Wed Dec  9 09:12:35 2015 from 50.141.74.132
+fwu@compute1:~$ screen -r 2
+2390.pts-12.compute1   29262.pts-12.compute1  
+fwu@compute1:~$ screen -r 2390.pts-12.compute1 
+[detached from 2390.pts-12.compute1]
+fwu@compute1:~$ screen -r 2390.pts-12.compute1 
+
+(libzbc) [ERROR] Write 256 blocks at block 7475298304 + 119630 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 7240941568 + 483339 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 7869038592 + 206913 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 5730992128 + 91170 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 2448949248 + 134866 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 15594422272 + 224019 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 1095237632 + 301579 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 7029129216 + 334013 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 485490688 + 318260 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 6229065728 + 432632 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 11565268992 + 523101 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 1393557504 + 320813 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 8973713408 + 449496 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 7467433984 + 146710 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 4670881792 + 488655 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 2058354688 + 6627 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 11553210368 + 400872 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 1718091776 + 165037 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 1566572544 + 222739 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 520617984 + 20526 failed -5 (Input/output error)
+warning: write fails
+(libzbc) [ERROR] Write 256 blocks at block 13175357440 + 365434 failed -5 (Input/output error)
+warning: write fails
+cp bw_long_rand_400000.csv /home/fwu
+time taken: 3441 sec.
