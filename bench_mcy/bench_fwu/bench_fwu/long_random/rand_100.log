@@ -1,0 +1,909 @@
+parsing script file: rand.job
+-2 -2 1024 524288 1
+script file rand.job has 1 lines
+total num_run=100
+Device /dev/sdb: ATA ST8000AS0022-1WL ZN03 
+    ATA ZAC interface, Host-aware disk model
+    15628053168 logical blocks of 512 B
+    1953506646 physical blocks of 4096 B
+    8001.563 GB capacity
+------processing script (1/100)------
+Target zone: Zone 12069 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6327631872, 524288 sectors, wp 6327631872
+lba_ofst=6723
+Writing 1024 blks to zone 12069 from lba_offset=6723 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6327631872, 524288 sectors, wp 6327631872
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 469
+  BW 246.144 MB/s
+------processing script (2/100)------
+Target zone: Zone 2098 / 29809, type 0x3 (Sequential-write-preferred), cond 0x2 (Implicit-open), need_reset 0, non_seq 0, LBA 1099956224, 524288 sectors, wp 1100314144
+lba_ofst=322653
+Writing 1024 blks to zone 2098 from lba_offset=322653 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x2 (Implicit-open), need_reset 0, non_seq 0, LBA 1099956224, 524288 sectors, wp 1100314144
+
+Wrote 524288 B (1 I/Os) in 0.050 sec
+  IOPS 19
+  BW 10.461 MB/s
+------processing script (3/100)------
+Target zone: Zone 8535 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4474798080, 524288 sectors, wp 4474798080
+lba_ofst=220023
+Writing 1024 blks to zone 8535 from lba_offset=220023 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4474798080, 524288 sectors, wp 4474798080
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 449
+  BW 235.529 MB/s
+------processing script (4/100)------
+Target zone: Zone 13875 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7274496000, 524288 sectors, wp 7274496000
+lba_ofst=10342
+Writing 1024 blks to zone 13875 from lba_offset=10342 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7274496000, 524288 sectors, wp 7274496000
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 464
+  BW 243.289 MB/s
+------processing script (5/100)------
+Target zone: Zone 20794 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10902044672, 524288 sectors, wp 10902044672
+lba_ofst=210420
+Writing 1024 blks to zone 20794 from lba_offset=210420 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10902044672, 524288 sectors, wp 10902044672
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 244.081 MB/s
+------processing script (6/100)------
+Target zone: Zone 6306 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3306160128, 524288 sectors, wp 3306160128
+lba_ofst=138897
+Writing 1024 blks to zone 6306 from lba_offset=138897 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3306160128, 524288 sectors, wp 3306160128
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 473
+  BW 248.477 MB/s
+------processing script (7/100)------
+Target zone: Zone 20997 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11008475136, 524288 sectors, wp 11008475136
+lba_ofst=40749
+Writing 1024 blks to zone 20997 from lba_offset=40749 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11008475136, 524288 sectors, wp 11008475136
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 244.879 MB/s
+------processing script (8/100)------
+Target zone: Zone 7364 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3860856832, 524288 sectors, wp 3860856832
+lba_ofst=21749
+Writing 1024 blks to zone 7364 from lba_offset=21749 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3860856832, 524288 sectors, wp 3860856832
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 469
+  BW 245.913 MB/s
+------processing script (9/100)------
+Target zone: Zone 22636 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11867783168, 524288 sectors, wp 11867783168
+lba_ofst=207222
+Writing 1024 blks to zone 22636 from lba_offset=207222 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11867783168, 524288 sectors, wp 11867783168
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 459
+  BW 240.830 MB/s
+------processing script (10/100)------
+Target zone: Zone 702 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 368050176, 524288 sectors, wp 368050176
+lba_ofst=27798
+Writing 1024 blks to zone 702 from lba_offset=27798 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 368050176, 524288 sectors, wp 368050176
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 243.854 MB/s
+------processing script (11/100)------
+Target zone: Zone 6723 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3524788224, 524288 sectors, wp 3524788224
+lba_ofst=61886
+Writing 1024 blks to zone 6723 from lba_offset=61886 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3524788224, 524288 sectors, wp 3524788224
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 245.223 MB/s
+------processing script (12/100)------
+Target zone: Zone 10754 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5638193152, 524288 sectors, wp 5638193152
+lba_ofst=63434
+Writing 1024 blks to zone 10754 from lba_offset=63434 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5638193152, 524288 sectors, wp 5638193152
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 469
+  BW 246.260 MB/s
+------processing script (13/100)------
+Target zone: Zone 20174 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10576986112, 524288 sectors, wp 10576986112
+lba_ofst=138121
+Writing 1024 blks to zone 20174 from lba_offset=138121 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10576986112, 524288 sectors, wp 10576986112
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 243.968 MB/s
+------processing script (14/100)------
+Target zone: Zone 8321 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4362600448, 524288 sectors, wp 4362600448
+lba_ofst=3035
+Writing 1024 blks to zone 8321 from lba_offset=3035 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4362600448, 524288 sectors, wp 4362600448
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 460
+  BW 241.384 MB/s
+------processing script (15/100)------
+Target zone: Zone 2748 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1440743424, 524288 sectors, wp 1440743424
+lba_ofst=473971
+Writing 1024 blks to zone 2748 from lba_offset=473971 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1440743424, 524288 sectors, wp 1440743424
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 466
+  BW 244.537 MB/s
+------processing script (16/100)------
+Target zone: Zone 8467 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4439146496, 524288 sectors, wp 4439146496
+lba_ofst=67658
+Writing 1024 blks to zone 8467 from lba_offset=67658 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4439146496, 524288 sectors, wp 4439146496
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 244.309 MB/s
+------processing script (17/100)------
+Target zone: Zone 24836 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13021216768, 524288 sectors, wp 13021216768
+lba_ofst=516395
+Writing 1024 blks to zone 24836 from lba_offset=516395 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13021216768, 524288 sectors, wp 13021216768
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 469
+  BW 246.144 MB/s
+------processing script (18/100)------
+Target zone: Zone 18498 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9698279424, 524288 sectors, wp 9698279424
+lba_ofst=397190
+Writing 1024 blks to zone 18498 from lba_offset=397190 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9698279424, 524288 sectors, wp 9698279424
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 439
+  BW 230.355 MB/s
+------processing script (19/100)------
+Target zone: Zone 22902 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12007243776, 524288 sectors, wp 12007243776
+lba_ofst=168224
+Writing 1024 blks to zone 22902 from lba_offset=168224 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12007243776, 524288 sectors, wp 12007243776
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 460
+  BW 241.607 MB/s
+------processing script (20/100)------
+Target zone: Zone 16100 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8441036800, 524288 sectors, wp 8441036800
+lba_ofst=295100
+Writing 1024 blks to zone 16100 from lba_offset=295100 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8441036800, 524288 sectors, wp 8441036800
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 462
+  BW 242.501 MB/s
+------processing script (21/100)------
+Target zone: Zone 20006 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10488905728, 524288 sectors, wp 10488905728
+lba_ofst=234692
+Writing 1024 blks to zone 20006 from lba_offset=234692 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10488905728, 524288 sectors, wp 10488905728
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 244.879 MB/s
+------processing script (22/100)------
+Target zone: Zone 3267 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1712848896, 524288 sectors, wp 1712848896
+lba_ofst=80123
+Writing 1024 blks to zone 3267 from lba_offset=80123 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1712848896, 524288 sectors, wp 1712848896
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 468
+  BW 245.453 MB/s
+------processing script (23/100)------
+Target zone: Zone 20621 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10811342848, 524288 sectors, wp 10811342848
+lba_ofst=239269
+Writing 1024 blks to zone 20621 from lba_offset=239269 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10811342848, 524288 sectors, wp 10811342848
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 450
+  BW 236.272 MB/s
+------processing script (24/100)------
+Target zone: Zone 13285 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6965166080, 524288 sectors, wp 6965166080
+lba_ofst=85813
+Writing 1024 blks to zone 13285 from lba_offset=85813 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6965166080, 524288 sectors, wp 6965166080
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 244.309 MB/s
+------processing script (25/100)------
+Target zone: Zone 20174 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10576986112, 524288 sectors, wp 10576986112
+lba_ofst=268175
+Writing 1024 blks to zone 20174 from lba_offset=268175 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10576986112, 524288 sectors, wp 10576986112
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 245.108 MB/s
+------processing script (26/100)------
+Target zone: Zone 26623 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13958119424, 524288 sectors, wp 13958119424
+lba_ofst=123076
+Writing 1024 blks to zone 26623 from lba_offset=123076 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13958119424, 524288 sectors, wp 13958119424
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 245.338 MB/s
+------processing script (27/100)------
+Target zone: Zone 6576 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3447717888, 524288 sectors, wp 3447717888
+lba_ofst=458609
+Writing 1024 blks to zone 6576 from lba_offset=458609 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3447717888, 524288 sectors, wp 3447717888
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 468
+  BW 245.453 MB/s
+------processing script (28/100)------
+Target zone: Zone 12095 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6341263360, 524288 sectors, wp 6341263360
+lba_ofst=369407
+Writing 1024 blks to zone 12095 from lba_offset=369407 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6341263360, 524288 sectors, wp 6341263360
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 458
+  BW 240.499 MB/s
+------processing script (29/100)------
+Target zone: Zone 4489 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 2353528832, 524288 sectors, wp 2353528832
+lba_ofst=461681
+Writing 1024 blks to zone 4489 from lba_offset=461681 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 2353528832, 524288 sectors, wp 2353528832
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 461
+  BW 242.053 MB/s
+------processing script (30/100)------
+Target zone: Zone 16971 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8897691648, 524288 sectors, wp 8897691648
+lba_ofst=115599
+Writing 1024 blks to zone 16971 from lba_offset=115599 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8897691648, 524288 sectors, wp 8897691648
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 468
+  BW 245.453 MB/s
+------processing script (31/100)------
+Target zone: Zone 26412 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13847494656, 524288 sectors, wp 13847494656
+lba_ofst=388181
+Writing 1024 blks to zone 26412 from lba_offset=388181 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13847494656, 524288 sectors, wp 13847494656
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 468
+  BW 245.568 MB/s
+------processing script (32/100)------
+Target zone: Zone 24351 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12766937088, 524288 sectors, wp 12766937088
+lba_ofst=367770
+Writing 1024 blks to zone 24351 from lba_offset=367770 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12766937088, 524288 sectors, wp 12766937088
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 468
+  BW 245.568 MB/s
+------processing script (33/100)------
+Target zone: Zone 8556 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4485808128, 524288 sectors, wp 4485808128
+lba_ofst=49280
+Writing 1024 blks to zone 8556 from lba_offset=49280 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4485808128, 524288 sectors, wp 4485808128
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 459
+  BW 240.719 MB/s
+------processing script (34/100)------
+Target zone: Zone 27427 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14379646976, 524288 sectors, wp 14379646976
+lba_ofst=68132
+Writing 1024 blks to zone 27427 from lba_offset=68132 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14379646976, 524288 sectors, wp 14379646976
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 464
+  BW 243.402 MB/s
+------processing script (35/100)------
+Target zone: Zone 1913 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1002962944, 524288 sectors, wp 1002962944
+lba_ofst=123917
+Writing 1024 blks to zone 1913 from lba_offset=123917 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1002962944, 524288 sectors, wp 1002962944
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 244.879 MB/s
+------processing script (36/100)------
+Target zone: Zone 1844 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 966787072, 524288 sectors, wp 966787072
+lba_ofst=71862
+Writing 1024 blks to zone 1844 from lba_offset=71862 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 966787072, 524288 sectors, wp 966787072
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 245.108 MB/s
+------processing script (37/100)------
+Target zone: Zone 8741 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4582801408, 524288 sectors, wp 4582801408
+lba_ofst=272942
+Writing 1024 blks to zone 8741 from lba_offset=272942 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4582801408, 524288 sectors, wp 4582801408
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 434
+  BW 227.555 MB/s
+------processing script (38/100)------
+Target zone: Zone 3240 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1698693120, 524288 sectors, wp 1698693120
+lba_ofst=109763
+Writing 1024 blks to zone 3240 from lba_offset=109763 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1698693120, 524288 sectors, wp 1698693120
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 460
+  BW 241.496 MB/s
+------processing script (39/100)------
+Target zone: Zone 18041 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9458679808, 524288 sectors, wp 9458679808
+lba_ofst=253858
+Writing 1024 blks to zone 18041 from lba_offset=253858 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9458679808, 524288 sectors, wp 9458679808
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 244.195 MB/s
+------processing script (40/100)------
+Target zone: Zone 15427 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8088190976, 524288 sectors, wp 8088190976
+lba_ofst=434414
+Writing 1024 blks to zone 15427 from lba_offset=434414 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8088190976, 524288 sectors, wp 8088190976
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 389
+  BW 204.161 MB/s
+------processing script (41/100)------
+Target zone: Zone 3064 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1606418432, 524288 sectors, wp 1606418432
+lba_ofst=309188
+Writing 1024 blks to zone 3064 from lba_offset=309188 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1606418432, 524288 sectors, wp 1606418432
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 463
+  BW 243.176 MB/s
+------processing script (42/100)------
+Target zone: Zone 7919 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4151836672, 524288 sectors, wp 4151836672
+lba_ofst=327807
+Writing 1024 blks to zone 7919 from lba_offset=327807 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4151836672, 524288 sectors, wp 4151836672
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 244.994 MB/s
+------processing script (43/100)------
+Target zone: Zone 22234 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11657019392, 524288 sectors, wp 11657019392
+lba_ofst=219713
+Writing 1024 blks to zone 22234 from lba_offset=219713 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11657019392, 524288 sectors, wp 11657019392
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 464
+  BW 243.515 MB/s
+------processing script (44/100)------
+Target zone: Zone 22572 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11834228736, 524288 sectors, wp 11834228736
+lba_ofst=315952
+Writing 1024 blks to zone 22572 from lba_offset=315952 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11834228736, 524288 sectors, wp 11834228736
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 458
+  BW 240.278 MB/s
+------processing script (45/100)------
+Target zone: Zone 26611 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13951827968, 524288 sectors, wp 13951827968
+lba_ofst=21080
+Writing 1024 blks to zone 26611 from lba_offset=21080 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13951827968, 524288 sectors, wp 13951827968
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 244.879 MB/s
+------processing script (46/100)------
+Target zone: Zone 20141 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10559684608, 524288 sectors, wp 10559684608
+lba_ofst=44183
+Writing 1024 blks to zone 20141 from lba_offset=44183 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10559684608, 524288 sectors, wp 10559684608
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 468
+  BW 245.568 MB/s
+------processing script (47/100)------
+Target zone: Zone 7789 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4083679232, 524288 sectors, wp 4083679232
+lba_ofst=90521
+Writing 1024 blks to zone 7789 from lba_offset=90521 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4083679232, 524288 sectors, wp 4083679232
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 464
+  BW 243.628 MB/s
+------processing script (48/100)------
+Target zone: Zone 17334 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9088008192, 524288 sectors, wp 9088008192
+lba_ofst=265263
+Writing 1024 blks to zone 17334 from lba_offset=265263 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9088008192, 524288 sectors, wp 9088008192
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 410
+  BW 215.136 MB/s
+------processing script (49/100)------
+Target zone: Zone 14032 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7356809216, 524288 sectors, wp 7356809216
+lba_ofst=128339
+Writing 1024 blks to zone 14032 from lba_offset=128339 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7356809216, 524288 sectors, wp 7356809216
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 244.081 MB/s
+------processing script (50/100)------
+Target zone: Zone 20355 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10671882240, 524288 sectors, wp 10671882240
+lba_ofst=357306
+Writing 1024 blks to zone 20355 from lba_offset=357306 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10671882240, 524288 sectors, wp 10671882240
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 466
+  BW 244.423 MB/s
+------processing script (51/100)------
+Target zone: Zone 14978 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7852785664, 524288 sectors, wp 7852785664
+lba_ofst=172339
+Writing 1024 blks to zone 14978 from lba_offset=172339 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7852785664, 524288 sectors, wp 7852785664
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 467
+  BW 245.338 MB/s
+------processing script (52/100)------
+Target zone: Zone 24044 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12605980672, 524288 sectors, wp 12605980672
+lba_ofst=86578
+Writing 1024 blks to zone 24044 from lba_offset=86578 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12605980672, 524288 sectors, wp 12605980672
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 468
+  BW 245.683 MB/s
+------processing script (53/100)------
+Target zone: Zone 29608 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 15523119104, 524288 sectors, wp 15523119104
+lba_ofst=56866
+Writing 1024 blks to zone 29608 from lba_offset=56866 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 15523119104, 524288 sectors, wp 15523119104
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 392
+  BW 205.764 MB/s
+------processing script (54/100)------
+Target zone: Zone 9518 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4990173184, 524288 sectors, wp 4990173184
+lba_ofst=433204
+Writing 1024 blks to zone 9518 from lba_offset=433204 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4990173184, 524288 sectors, wp 4990173184
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 458
+  BW 240.278 MB/s
+------processing script (55/100)------
+Target zone: Zone 2734 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1433403392, 524288 sectors, wp 1433403392
+lba_ofst=391917
+Writing 1024 blks to zone 2734 from lba_offset=391917 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1433403392, 524288 sectors, wp 1433403392
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 244.081 MB/s
+------processing script (56/100)------
+Target zone: Zone 28671 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 15031861248, 524288 sectors, wp 15031861248
+lba_ofst=308470
+Writing 1024 blks to zone 28671 from lba_offset=308470 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 15031861248, 524288 sectors, wp 15031861248
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 465
+  BW 243.968 MB/s
+------processing script (57/100)------
+Target zone: Zone 9803 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5139595264, 524288 sectors, wp 5139595264
+lba_ofst=376533
+Writing 1024 blks to zone 9803 from lba_offset=376533 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5139595264, 524288 sectors, wp 5139595264
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 462
+  BW 242.725 MB/s
+------processing script (58/100)------
+Target zone: Zone 1620 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 849346560, 524288 sectors, wp 849346560
+lba_ofst=420327
+Writing 1024 blks to zone 1620 from lba_offset=420327 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 849346560, 524288 sectors, wp 849346560
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 457
+  BW 239.619 MB/s
+------processing script (59/100)------
+Target zone: Zone 26668 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13981712384, 524288 sectors, wp 13981712384
+lba_ofst=284915
+Writing 1024 blks to zone 26668 from lba_offset=284915 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13981712384, 524288 sectors, wp 13981712384
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 462
+  BW 242.501 MB/s
+------processing script (60/100)------
+Target zone: Zone 28824 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 15112077312, 524288 sectors, wp 15112077312
+lba_ofst=229065
+Writing 1024 blks to zone 28824 from lba_offset=229065 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 15112077312, 524288 sectors, wp 15112077312
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 466
+  BW 244.423 MB/s
+------processing script (61/100)------
+Target zone: Zone 6542 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3429892096, 524288 sectors, wp 3429892096
+lba_ofst=119255
+Writing 1024 blks to zone 6542 from lba_offset=119255 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3429892096, 524288 sectors, wp 3429892096
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 466
+  BW 244.537 MB/s
+------processing script (62/100)------
+Target zone: Zone 19365 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10152837120, 524288 sectors, wp 10152837120
+lba_ofst=190969
+Writing 1024 blks to zone 19365 from lba_offset=190969 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10152837120, 524288 sectors, wp 10152837120
+
+Wrote 524288 B (1 I/Os) in 0.003 sec
+  IOPS 333
+  BW 174.704 MB/s
+------processing script (63/100)------
+Target zone: Zone 20149 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10563878912, 524288 sectors, wp 10563878912
+lba_ofst=160915
+Writing 1024 blks to zone 20149 from lba_offset=160915 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 10563878912, 524288 sectors, wp 10563878912
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 457
+  BW 239.729 MB/s
+------processing script (64/100)------
+Target zone: Zone 3228 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1692401664, 524288 sectors, wp 1692401664
+lba_ofst=349577
+Writing 1024 blks to zone 3228 from lba_offset=349577 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1692401664, 524288 sectors, wp 1692401664
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 464
+  BW 243.515 MB/s
+------processing script (65/100)------
+Target zone: Zone 21778 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11417944064, 524288 sectors, wp 11417944064
+lba_ofst=265339
+Writing 1024 blks to zone 21778 from lba_offset=265339 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11417944064, 524288 sectors, wp 11417944064
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 466
+  BW 244.651 MB/s
+------processing script (66/100)------
+Target zone: Zone 22679 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11890327552, 524288 sectors, wp 11890327552
+lba_ofst=17222
+Writing 1024 blks to zone 22679 from lba_offset=17222 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11890327552, 524288 sectors, wp 11890327552
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 466
+  BW 244.651 MB/s
+------processing script (67/100)------
+Target zone: Zone 18335 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9612820480, 524288 sectors, wp 9612820480
+lba_ofst=87476
+Writing 1024 blks to zone 18335 from lba_offset=87476 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9612820480, 524288 sectors, wp 9612820480
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 456
+  BW 239.182 MB/s
+------processing script (68/100)------
+Target zone: Zone 3283 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1721237504, 524288 sectors, wp 1721237504
+lba_ofst=358672
+Writing 1024 blks to zone 3283 from lba_offset=358672 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1721237504, 524288 sectors, wp 1721237504
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 439
+  BW 230.456 MB/s
+------processing script (69/100)------
+Target zone: Zone 3187 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1670905856, 524288 sectors, wp 1670905856
+lba_ofst=300141
+Writing 1024 blks to zone 3187 from lba_offset=300141 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1670905856, 524288 sectors, wp 1670905856
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 457
+  BW 240.058 MB/s
+------processing script (70/100)------
+Target zone: Zone 8655 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4537712640, 524288 sectors, wp 4537712640
+lba_ofst=455067
+Writing 1024 blks to zone 8655 from lba_offset=455067 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4537712640, 524288 sectors, wp 4537712640
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 459
+  BW 241.051 MB/s
+------processing script (71/100)------
+Target zone: Zone 23927 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12544638976, 524288 sectors, wp 12544638976
+lba_ofst=86631
+Writing 1024 blks to zone 23927 from lba_offset=86631 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12544638976, 524288 sectors, wp 12544638976
+
+Wrote 524288 B (1 I/Os) in 0.003 sec
+  IOPS 318
+  BW 167.237 MB/s
+------processing script (72/100)------
+Target zone: Zone 11529 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6044516352, 524288 sectors, wp 6044516352
+lba_ofst=344589
+Writing 1024 blks to zone 11529 from lba_offset=344589 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6044516352, 524288 sectors, wp 6044516352
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 456
+  BW 239.400 MB/s
+------processing script (73/100)------
+Target zone: Zone 607 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 318242816, 524288 sectors, wp 318242816
+lba_ofst=351238
+Writing 1024 blks to zone 607 from lba_offset=351238 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 318242816, 524288 sectors, wp 318242816
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 458
+  BW 240.278 MB/s
+------processing script (74/100)------
+Target zone: Zone 22202 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11640242176, 524288 sectors, wp 11640242176
+lba_ofst=10835
+Writing 1024 blks to zone 22202 from lba_offset=10835 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11640242176, 524288 sectors, wp 11640242176
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 456
+  BW 239.510 MB/s
+------processing script (75/100)------
+Target zone: Zone 23521 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12331778048, 524288 sectors, wp 12331778048
+lba_ofst=452620
+Writing 1024 blks to zone 23521 from lba_offset=452620 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12331778048, 524288 sectors, wp 12331778048
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 459
+  BW 240.719 MB/s
+------processing script (76/100)------
+Target zone: Zone 23362 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12248416256, 524288 sectors, wp 12248416256
+lba_ofst=417860
+Writing 1024 blks to zone 23362 from lba_offset=417860 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 12248416256, 524288 sectors, wp 12248416256
+
+Wrote 524288 B (1 I/Os) in 0.169 sec
+  IOPS 5
+  BW 3.087 MB/s
+------processing script (77/100)------
+Target zone: Zone 13055 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6844579840, 524288 sectors, wp 6844579840
+lba_ofst=513149
+Writing 1024 blks to zone 13055 from lba_offset=513149 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 6844579840, 524288 sectors, wp 6844579840
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 414
+  BW 217.096 MB/s
+------processing script (78/100)------
+Target zone: Zone 830 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 435159040, 524288 sectors, wp 435159040
+lba_ofst=257363
+Writing 1024 blks to zone 830 from lba_offset=257363 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 435159040, 524288 sectors, wp 435159040
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 431
+  BW 226.278 MB/s
+------processing script (79/100)------
+Target zone: Zone 6116 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3206545408, 524288 sectors, wp 3206545408
+lba_ofst=16486
+Writing 1024 blks to zone 6116 from lba_offset=16486 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3206545408, 524288 sectors, wp 3206545408
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 424
+  BW 222.344 MB/s
+------processing script (80/100)------
+Target zone: Zone 10192 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5343543296, 524288 sectors, wp 5343543296
+lba_ofst=439030
+Writing 1024 blks to zone 10192 from lba_offset=439030 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5343543296, 524288 sectors, wp 5343543296
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 393
+  BW 206.493 MB/s
+------processing script (81/100)------
+Target zone: Zone 13822 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7246708736, 524288 sectors, wp 7246708736
+lba_ofst=265248
+Writing 1024 blks to zone 13822 from lba_offset=265248 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7246708736, 524288 sectors, wp 7246708736
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 425
+  BW 223.006 MB/s
+------processing script (82/100)------
+Target zone: Zone 7458 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3910139904, 524288 sectors, wp 3910139904
+lba_ofst=195217
+Writing 1024 blks to zone 7458 from lba_offset=195217 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3910139904, 524288 sectors, wp 3910139904
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 429
+  BW 225.403 MB/s
+------processing script (83/100)------
+Target zone: Zone 22402 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11745099776, 524288 sectors, wp 11745099776
+lba_ofst=35765
+Writing 1024 blks to zone 22402 from lba_offset=35765 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11745099776, 524288 sectors, wp 11745099776
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 425
+  BW 223.196 MB/s
+------processing script (84/100)------
+Target zone: Zone 9279 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4864868352, 524288 sectors, wp 4864868352
+lba_ofst=497067
+Writing 1024 blks to zone 9279 from lba_offset=497067 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 4864868352, 524288 sectors, wp 4864868352
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 438
+  BW 229.648 MB/s
+------processing script (85/100)------
+Target zone: Zone 9723 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5097652224, 524288 sectors, wp 5097652224
+lba_ofst=297190
+Writing 1024 blks to zone 9723 from lba_offset=297190 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5097652224, 524288 sectors, wp 5097652224
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 424
+  BW 222.627 MB/s
+------processing script (86/100)------
+Target zone: Zone 17691 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9275179008, 524288 sectors, wp 9275179008
+lba_ofst=503678
+Writing 1024 blks to zone 17691 from lba_offset=503678 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 9275179008, 524288 sectors, wp 9275179008
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 426
+  BW 223.481 MB/s
+------processing script (87/100)------
+Target zone: Zone 27813 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14582022144, 524288 sectors, wp 14582022144
+lba_ofst=142807
+Writing 1024 blks to zone 27813 from lba_offset=142807 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14582022144, 524288 sectors, wp 14582022144
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 427
+  BW 224.246 MB/s
+------processing script (88/100)------
+Target zone: Zone 10187 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5340921856, 524288 sectors, wp 5340921856
+lba_ofst=322698
+Writing 1024 blks to zone 10187 from lba_offset=322698 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 5340921856, 524288 sectors, wp 5340921856
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 429
+  BW 225.209 MB/s
+------processing script (89/100)------
+Target zone: Zone 28549 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14967898112, 524288 sectors, wp 14967898112
+lba_ofst=40319
+Writing 1024 blks to zone 28549 from lba_offset=40319 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14967898112, 524288 sectors, wp 14967898112
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 414
+  BW 217.366 MB/s
+------processing script (90/100)------
+Target zone: Zone 28248 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14810087424, 524288 sectors, wp 14810087424
+lba_ofst=81622
+Writing 1024 blks to zone 28248 from lba_offset=81622 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 14810087424, 524288 sectors, wp 14810087424
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 428
+  BW 224.534 MB/s
+------processing script (91/100)------
+Target zone: Zone 26223 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13748404224, 524288 sectors, wp 13748404224
+lba_ofst=49146
+Writing 1024 blks to zone 26223 from lba_offset=49146 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 13748404224, 524288 sectors, wp 13748404224
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 428
+  BW 224.438 MB/s
+------processing script (92/100)------
+Target zone: Zone 22452 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11771314176, 524288 sectors, wp 11771314176
+lba_ofst=16238
+Writing 1024 blks to zone 22452 from lba_offset=16238 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11771314176, 524288 sectors, wp 11771314176
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 425
+  BW 223.006 MB/s
+------processing script (93/100)------
+Target zone: Zone 7400 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3879731200, 524288 sectors, wp 3879731200
+lba_ofst=59737
+Writing 1024 blks to zone 7400 from lba_offset=59737 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 3879731200, 524288 sectors, wp 3879731200
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 419
+  BW 220.011 MB/s
+------processing script (94/100)------
+Target zone: Zone 15289 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8015839232, 524288 sectors, wp 8015839232
+lba_ofst=187784
+Writing 1024 blks to zone 15289 from lba_offset=187784 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 8015839232, 524288 sectors, wp 8015839232
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 423
+  BW 221.780 MB/s
+------processing script (95/100)------
+Target zone: Zone 13520 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7088373760, 524288 sectors, wp 7088373760
+lba_ofst=356254
+Writing 1024 blks to zone 13520 from lba_offset=356254 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7088373760, 524288 sectors, wp 7088373760
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 431
+  BW 225.986 MB/s
+------processing script (96/100)------
+Target zone: Zone 13963 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7320633344, 524288 sectors, wp 7320633344
+lba_ofst=358049
+Writing 1024 blks to zone 13963 from lba_offset=358049 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 7320633344, 524288 sectors, wp 7320633344
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 430
+  BW 225.694 MB/s
+------processing script (97/100)------
+Target zone: Zone 1160 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 608174080, 524288 sectors, wp 608174080
+lba_ofst=34491
+Writing 1024 blks to zone 1160 from lba_offset=34491 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 608174080, 524288 sectors, wp 608174080
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 429
+  BW 225.306 MB/s
+------processing script (98/100)------
+Target zone: Zone 2306 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1209008128, 524288 sectors, wp 1209008128
+lba_ofst=449939
+Writing 1024 blks to zone 2306 from lba_offset=449939 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 1209008128, 524288 sectors, wp 1209008128
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 417
+  BW 218.635 MB/s
+------processing script (99/100)------
+Target zone: Zone 4715 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 2472017920, 524288 sectors, wp 2472017920
+lba_ofst=58580
+Writing 1024 blks to zone 4715 from lba_offset=58580 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 2472017920, 524288 sectors, wp 2472017920
+
+Wrote 524288 B (1 I/Os) in 0.002 sec
+  IOPS 426
+  BW 223.767 MB/s
+------processing script (100/100)------
+Target zone: Zone 21704 / 29809, type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11379146752, 524288 sectors, wp 11379146752
+lba_ofst=406164
+Writing 1024 blks to zone 21704 from lba_offset=406164 iosize=524288, (1/1)
+zone type 0x3 (Sequential-write-preferred), cond 0x1 (Empty), need_reset 0, non_seq 0, LBA 11379146752, 524288 sectors, wp 11379146752
+
+Wrote 524288 B (1 I/Os) in 0.099 sec
+  IOPS 10
+  BW 5.287 MB/s
