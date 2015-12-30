@@ -1058,7 +1058,6 @@ zbc_ata_pwrite(zbc_device_t *dev,
                uint64_t lba_ofst)
 {
     int ret;
-
     /* ATA command or native SCSI command ? */
     if ( dev->zbd_flags & ZBC_ATA_SCSI_RW ) {
         ret = zbc_ata_pwrite_scsi(dev, zone, buf, lba_count, lba_ofst);

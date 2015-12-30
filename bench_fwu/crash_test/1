@@ -1,0 +1,7 @@
+Usage: /home/fwu/libzbc/.libs/lt-zbc_write_zone3 [options] <dev>
+  Write into zone(s) based on the specified <script>
+Options:
+    -v          : verbose mode
+    -s          : (sync) Run zbc_flush after writing
+    -p <script> : the <script> to be processed
+    -k <num_run>: repeat the script for <num_run> times

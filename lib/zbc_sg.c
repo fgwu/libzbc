@@ -343,7 +343,6 @@ zbc_sg_cmd_exec(zbc_device_t *dev,
                 zbc_sg_cmd_t *cmd)
 {
     int ret;
-
     if ( zbc_log_level >= ZBC_LOG_DEBUG ) {
         zbc_debug("%s: Sending command 0x%02x:0x%02x (%s):\n",
                   dev->zbd_filename,
