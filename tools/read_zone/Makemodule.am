@@ -1,3 +1,8 @@
 bin_PROGRAMS += zbc_read_zone
 zbc_read_zone_SOURCES = tools/read_zone/zbc_read_zone.c
 zbc_read_zone_LDADD = $(libzbc_ldadd)
+
+
+bin_PROGRAMS += zbc_read_zone2
+zbc_read_zone2_SOURCES = tools/read_zone/zbc_read_zone2.c
+zbc_read_zone2_LDADD = $(libzbc_ldadd)

@@ -1,0 +1,68 @@
+fwu@compute1:~$ screen -r pts-12.compute1 
+
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1824 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1825 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1826 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1827 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1828 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1829 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1830 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1831 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1832 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1833 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1834 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1835 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1836 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1837 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1838 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1839 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1840 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1841 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1842 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1843 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1844 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1845 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1846 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1847 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1848 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1849 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1850 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1851 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1852 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1853 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1854 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1855 0
+zbc_report_nr_zones at lba 0, ro 0x00 failed -6
+1856 0

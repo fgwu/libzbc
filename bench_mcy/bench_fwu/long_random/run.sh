@@ -1,10 +1,10 @@
 #!/bin/bash
 
-bench_bin=~/libzbc/bench
+bench_bin=~/libzbc/bench_fwu
 
-if [ $# -ne 1 ]
+if [ $# -ne 2 ]
 then
-    echo Usage: $0 [sample_num]
+    echo Usage: $0 [sample_num] [lba_count]
     echo sample_num: the number of random lbas to run
     exit -1
 fi
@@ -16,8 +16,8 @@ sample_num=$1
 #result_file="long_rand.csv"
 result_file=bw_long_rand_$sample_num.csv
 echo "" > $result_file
-echo -2 -2 1024 1
-echo -2 -2 1024 1 > rand.job
+echo -2 -2 $2 1
+echo -2 -2 $2 1 > rand.job
 echo $bench_bin/zbc_write_zone2 -p rand.job -k $sample_num /dev/sdb
 $bench_bin/zbc_write_zone2 -p rand.job -k $sample_num /dev/sdb > rand_$sample_num.log
 #$bench_bin/reset_write_ptr_all.sh /dev/sdb > /dev/null
