@@ -1,3 +1,7 @@
 bin_PROGRAMS += zbc_reset_write_ptr
 zbc_reset_write_ptr_SOURCES = tools/reset_write_ptr/zbc_reset_write_ptr.c
 zbc_reset_write_ptr_LDADD = $(libzbc_ldadd)
+
+bin_PROGRAMS += zbc_reset_write_ptr2
+zbc_reset_write_ptr2_SOURCES = tools/reset_write_ptr/zbc_reset_write_ptr2.c
+zbc_reset_write_ptr2_LDADD = $(libzbc_ldadd)
