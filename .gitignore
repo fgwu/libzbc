@@ -31,9 +31,13 @@ zbc_close_zone
 zbc_finish_zone
 zbc_open_zone
 zbc_write_zone
+zbc_write_zone2
+zbc_write_zone3
 zbc_read_zone
+zbc_read_zone2
 zbc_set_zones
 zbc_set_write_ptr
+zbc_set_write_ptr2
 gzbc
 
 test/programs/zbc_test_print_devinfo

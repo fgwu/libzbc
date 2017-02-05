@@ -1,0 +1,38 @@
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+# download and compile
+git clone https://github.com/fgwu/libzbc.git
+cd libzbc
+./autogen.sh
+./configure
+make
+
+# I had a program "tools/write_zone/zbc_writezone2.c" that can run trace
+# format:
+
+~$ ./zbc_write_zone2
+# Usage: /home/fwu/libzbc/.libs/lt-zbc_write_zone2 [options] <dev>
+# Write into zone(s) based on the specified <script>
+#Options:
+#-v          : verbose mode
+#-s          : (sync) Run zbc_flush after writing
+#-p <script> : the <script> to be processed
+#    -k <num_run>: repeat the script for <num_run> times
+
+# I had a example, which I wrote to sequentially and randomly write to a set of zones
+# see "bench_fwu/working_set_wp_lba" and "bench_fwu/working_set_rand_lba"
+# you can run by:
+
+cd bench_fwu/working_set_wp_lba
+sudo ./run.sh
+
+# and
+
+cd bench_fwu/working_set_rand_lba
+sudo ./run.sh
+
+# Hope this could be useful
+
+
